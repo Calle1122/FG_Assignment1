@@ -5,23 +5,56 @@ using UnityEngine;
 public class ActivePlayerController : MonoBehaviour
 {
 
-    public List<GameObject> playerUnits;
-    public int activePlayerIndex = 0;
+    [SerializeField] private GameObject battleManObj;
+    [SerializeField] private GameObject cameraContObj;
+    
+    public PlayerManager[] allPlayerManagers;
+    public GameObject activePlayer;
+    
+    private BattleManager _battleMan;
+    private CameraController _cameraCont;
+    private int _activePlayerIndex = 0;
 
-    [SerializeField] private GameObject gameManager;
+    void Awake()
+    {
+        _battleMan = battleManObj.GetComponent<BattleManager>();
+
+        allPlayerManagers = new PlayerManager[_battleMan.allPlayers.Length];
+        
+        _cameraCont = cameraContObj.GetComponent<CameraController>();
+    }
 
     void Start()
     {
+        for (int i = 0; i < allPlayerManagers.Length; i++)
+        {
+            allPlayerManagers[i] = _battleMan.allPlayers[i].GetComponent<PlayerManager>();
+        }
+
+        activePlayer = allPlayerManagers[_activePlayerIndex].gameObject;
         
-    }
-    
-    void Update()
-    {
-        
+        _cameraCont.UpdateCameraTarget(activePlayer);
     }
 
-    public GameObject GetActiveUnit()
+    void Update()
     {
-        return playerUnits[activePlayerIndex];
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            NextPlayerActive();
+        }
     }
+
+    void NextPlayerActive()
+    {
+        _activePlayerIndex++;
+        if (_activePlayerIndex == _battleMan.allPlayers.Length)
+        {
+            _activePlayerIndex = 0;
+        }
+        
+        activePlayer = allPlayerManagers[_activePlayerIndex].gameObject;
+        
+        _cameraCont.UpdateCameraTarget(activePlayer);
+    }
+
 }

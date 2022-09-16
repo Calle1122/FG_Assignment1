@@ -8,24 +8,12 @@ public class GameManager : MonoBehaviour
     public int numberOfPlayer;
     public int numberOfUnits;
 
-    [SerializeField] private GameObject specificPlayerManager;
-    [SerializeField] private GameObject playerPrefab;
+    public GameObject[] playerPrefabs;
 
-    void Start()
+    //SetPlayerPrefabs() will be called from main menu after all players select their character.
+    void SetPlayerPrefabs(GameObject[] allPlayerPrefabs)
     {
-        for (int i = 0; i < numberOfPlayer; i++)
-        {
-            GameObject newPlayerManager = Instantiate(specificPlayerManager, Vector3.zero, Quaternion.identity);
-            
-            for (int j = 0; j < numberOfUnits; j++)
-            {
-                //Add a list with all player units.
-            }
-        }
+        playerPrefabs = allPlayerPrefabs;
     }
     
-    void Update()
-    {
-        
-    }
 }

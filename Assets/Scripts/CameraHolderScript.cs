@@ -1,21 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraHolderScript : MonoBehaviour
 {
+    [SerializeField] GameObject activePlayerManObj;
 
-    [SerializeField] private Transform playerCameraTransform;
+    private ActivePlayerController _activeMan;
+    private Transform _transformToFocus;
 
-    [SerializeField] private ActivePlayerController currentPlayer;
-    
-    void Start()
+    void Awake()
     {
-        playerCameraTransform = currentPlayer.GetActiveUnit().transform;
+        _activeMan = activePlayerManObj.GetComponent<ActivePlayerController>();
+    }
+
+    private void Start()
+    {
+        SetCameraFocus();
     }
 
     void Update()
     {
-        transform.position = playerCameraTransform.position;
+        transform.position = _transformToFocus.position;
+    }
+    
+    public void SetCameraFocus()
+    {
+        _transformToFocus = _activeMan.activePlayer.GetComponent<PlayerManager>().cameraPosTransform;
     }
 }
