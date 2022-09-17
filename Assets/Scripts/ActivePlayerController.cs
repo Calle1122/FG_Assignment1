@@ -10,6 +10,8 @@ public class ActivePlayerController : MonoBehaviour
     
     public PlayerManager[] allPlayerManagers;
     public GameObject activePlayer;
+
+    private CharacterController[] _allCharacterControllers;
     
     private BattleManager _battleMan;
     private CameraController _cameraCont;
@@ -18,10 +20,9 @@ public class ActivePlayerController : MonoBehaviour
     void Awake()
     {
         _battleMan = battleManObj.GetComponent<BattleManager>();
-
         allPlayerManagers = new PlayerManager[_battleMan.allPlayers.Length];
-        
         _cameraCont = cameraContObj.GetComponent<CameraController>();
+        _allCharacterControllers = new CharacterController[_battleMan.allPlayers.Length];
     }
 
     void Start()
@@ -29,9 +30,11 @@ public class ActivePlayerController : MonoBehaviour
         for (int i = 0; i < allPlayerManagers.Length; i++)
         {
             allPlayerManagers[i] = _battleMan.allPlayers[i].GetComponent<PlayerManager>();
+            _allCharacterControllers[i] = _battleMan.allPlayers[i].GetComponent<CharacterController>();
         }
 
         activePlayer = allPlayerManagers[_activePlayerIndex].gameObject;
+        _allCharacterControllers[_activePlayerIndex].canMove = true;
         
         _cameraCont.UpdateCameraTarget(activePlayer);
     }
@@ -46,6 +49,8 @@ public class ActivePlayerController : MonoBehaviour
 
     void NextPlayerActive()
     {
+        _allCharacterControllers[_activePlayerIndex].canMove = false;
+        
         _activePlayerIndex++;
         if (_activePlayerIndex == _battleMan.allPlayers.Length)
         {
@@ -55,6 +60,8 @@ public class ActivePlayerController : MonoBehaviour
         activePlayer = allPlayerManagers[_activePlayerIndex].gameObject;
         
         _cameraCont.UpdateCameraTarget(activePlayer);
+        
+        _allCharacterControllers[_activePlayerIndex].canMove = true;
     }
 
 }

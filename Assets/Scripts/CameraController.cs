@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
 
     private float _rotationX, _rotationY;
     private Transform _playerTransform;
-    [SerializeField] private Transform thirdPersonRotator;
+    [SerializeField] public Transform thirdPersonRotator;
 
     void Awake()
     {
