@@ -49,12 +49,7 @@ public class CharacterController : MonoBehaviour
         }
         
         RaycastHit hit;
-        
-        /*if (Physics.Raycast(transform.position, Vector3.down, out hit, groundRayDis, groundLayer))
-        {
-            _jump = false;
-        }*/
-        
+
         if (Physics.SphereCast(transform.position, .2f, Vector3.down, out hit, groundRayDis, groundLayer))
         {
             _jump = false;
