@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 414578794574443121}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 414578795215165246}
   - component: {fileID: 6977405768536502276}
   - component: {fileID: 2623283878638006473}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,9 +176,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6efce36010840ef4ab4feb3682ca5862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 2
-  maxSpeed: 2
+  speed: 2.5
   jumpForce: 4
+  maxChargeTime: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  groundRayDis: 1.1
   canMove: 0
 --- !u!1 &884795146904105590
 GameObject:
@@ -191,7 +195,7 @@ GameObject:
   - component: {fileID: 7260445822103794511}
   - component: {fileID: 5648811953106706930}
   - component: {fileID: 2097331413093614185}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Larm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +278,7 @@ GameObject:
   - component: {fileID: 2810725643917840215}
   - component: {fileID: 2264390368549817668}
   - component: {fileID: 6066884726967643429}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +359,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7070941164166979208}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BodyParts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
