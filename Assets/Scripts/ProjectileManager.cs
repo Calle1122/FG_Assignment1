@@ -13,7 +13,12 @@ public class ProjectileManager : MonoBehaviour
     {
         _damage = GameObject.Find("ActivePlayerController").GetComponent<ActivePlayerController>().activePlayer.GetComponent<WeaponManager>().activeWeapon.damage;
     }
-    
+
+    private void Update()
+    {
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, this.gameObject.GetComponent<Rigidbody>().velocity);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         GameObject newHitParticle = Instantiate(hitParticle, transform.position, hitParticle.transform.rotation);

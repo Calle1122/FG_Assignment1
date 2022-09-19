@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c371fa4345cfe564fbdfa12c8ca23437, type: 3}
   m_Name: Blaster
   m_EditorClassIdentifier: 
-  weapon: {fileID: 4891464189948282670, guid: 8ba28352e1768b74a85dfefd560a9a0d, type: 3}
+  weapon: {fileID: 7870107419533999349, guid: 0cc56d5f8345db845ae31bcd98339e3a, type: 3}
   projectile: {fileID: 4891464189948282670, guid: b5615027b9d0ad4419c41d29e351d484, type: 3}
   baseForce: 10
   damage: 20

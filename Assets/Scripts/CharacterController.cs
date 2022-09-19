@@ -43,6 +43,7 @@ public class CharacterController : MonoBehaviour
     
     void Update()
     {
+
         if (_isCharging)
         {
             ChargeTime();
@@ -146,7 +147,7 @@ public class CharacterController : MonoBehaviour
         Vector3 combinedDir = (zDir + xDir).normalized;
         
         Vector3 moveDir = new Vector3(combinedDir.x, 0, combinedDir.z).normalized;
-        
+
         Vector3 rayDir = moveDir * 10;
         Debug.DrawRay(transform.position, rayDir, Color.green);
         

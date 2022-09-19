@@ -85,6 +85,7 @@ public class CameraController : MonoBehaviour
         
         //Rotate camera and player
         thirdPersonRotator.transform.rotation = Quaternion.Euler(_rotationX, _rotationY, 0);
+        
     }
     
     void MoveFirstPersonCamera()
