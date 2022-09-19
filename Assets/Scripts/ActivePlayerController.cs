@@ -12,6 +12,7 @@ public class ActivePlayerController : MonoBehaviour
     public GameObject activePlayer;
 
     private CharacterController[] _allCharacterControllers;
+    private WeaponManager[] _allWeaponManagers;
     
     private BattleManager _battleMan;
     private CameraController _cameraCont;
@@ -23,6 +24,7 @@ public class ActivePlayerController : MonoBehaviour
         allPlayerManagers = new PlayerManager[_battleMan.allPlayers.Length];
         _cameraCont = cameraContObj.GetComponent<CameraController>();
         _allCharacterControllers = new CharacterController[_battleMan.allPlayers.Length];
+        _allWeaponManagers = new WeaponManager[_battleMan.allPlayers.Length];
     }
 
     void Start()
@@ -31,10 +33,12 @@ public class ActivePlayerController : MonoBehaviour
         {
             allPlayerManagers[i] = _battleMan.allPlayers[i].GetComponent<PlayerManager>();
             _allCharacterControllers[i] = _battleMan.allPlayers[i].GetComponent<CharacterController>();
+            _allWeaponManagers[i] = _battleMan.allPlayers[i].GetComponent<WeaponManager>();
         }
 
         activePlayer = allPlayerManagers[_activePlayerIndex].gameObject;
         _allCharacterControllers[_activePlayerIndex].canMove = true;
+        _allWeaponManagers[_activePlayerIndex].canShoot = true;
         
         _cameraCont.UpdateCameraTarget(activePlayer);
     }
@@ -49,19 +53,42 @@ public class ActivePlayerController : MonoBehaviour
 
     void NextPlayerActive()
     {
+        bool hasSelected = false;
+        
         _allCharacterControllers[_activePlayerIndex].canMove = false;
-        
-        _activePlayerIndex++;
-        if (_activePlayerIndex == _battleMan.allPlayers.Length)
+        _allWeaponManagers[_activePlayerIndex].canShoot = false;
+
+        while (hasSelected == false)
         {
-            _activePlayerIndex = 0;
+            _activePlayerIndex++;
+
+            if (_activePlayerIndex == _battleMan.allPlayers.Length)
+            {
+                _activePlayerIndex = 0;
+            }
+
+            if (allPlayerManagers[_activePlayerIndex] != null)
+            {
+                hasSelected = true;
+            }
         }
-        
+
         activePlayer = allPlayerManagers[_activePlayerIndex].gameObject;
         
         _cameraCont.UpdateCameraTarget(activePlayer);
         
         _allCharacterControllers[_activePlayerIndex].canMove = true;
+        _allWeaponManagers[_activePlayerIndex].canShoot = true;
+    }
+
+    public void EquipWeapon(Weapon toEquip)
+    {
+        _allWeaponManagers[_activePlayerIndex].EquipWeapon(toEquip);
+    }
+
+    public void NoWeapon()
+    {
+        _allWeaponManagers[_activePlayerIndex].NoWeaponActive();
     }
 
 }

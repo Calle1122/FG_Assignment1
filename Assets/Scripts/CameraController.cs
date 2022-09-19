@@ -38,12 +38,18 @@ public class CameraController : MonoBehaviour
         
         if (thirdPersonCam.enabled)
         {
-            MoveThirdPersonCamera();
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                MoveThirdPersonCamera();
+            }
         }
         
         if (firstPersonCam.enabled)
         {
-            MoveFirstPersonCamera();
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                MoveFirstPersonCamera();
+            }
         }
     }
 

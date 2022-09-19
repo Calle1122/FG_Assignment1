@@ -7,7 +7,7 @@ using TMPro;
 public class HealthbarManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI nameTxt, healthTxt;
-    [SerializeField] private Image barBackground;
+    [SerializeField] private Canvas healthBarCanv;
 
     private CameraController _camController;
 
@@ -18,7 +18,7 @@ public class HealthbarManager : MonoBehaviour
 
     void Update()
     {
-        barBackground.transform.LookAt(_camController.activeCamera.transform.position);
+        healthBarCanv.transform.LookAt(_camController.activeCamera.transform.position);
     }
     
     public void SetName(string newName)
