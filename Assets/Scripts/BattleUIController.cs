@@ -6,6 +6,10 @@ using TMPro;
 
 public class BattleUIController : MonoBehaviour
 {
+    public GameObject weaponsMenuHolder;
+
+    [SerializeField] private Button bazookaBtn, blasterBtn;
+    
     public GameObject jumpSliderHolder;
     public Slider jumpSlider;
 
@@ -14,7 +18,25 @@ public class BattleUIController : MonoBehaviour
 
     void Start()
     {
+        weaponsMenuHolder.SetActive(false);
         jumpSliderHolder.SetActive(false);
         shootSliderHolder.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            weaponsMenuHolder.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            weaponsMenuHolder.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

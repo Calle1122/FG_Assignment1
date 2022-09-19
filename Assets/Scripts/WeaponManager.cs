@@ -10,6 +10,8 @@ public class WeaponManager : MonoBehaviour
     
     private BattleUIController _battleUICon;
 
+    public bool canShoot = false;
+    
     public float maxChargeTime = 1f;
     private float _shootMultiTimer = 0f;
     private bool _isCharging = false;
@@ -29,38 +31,53 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-        if (_isCharging)
+        if (canShoot)
         {
-            ChargeTime();
-        }
-        
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            EquipWeapon();
-        }
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-            _shootMultiTimer = 0;
-                
-            _battleUICon.shootSliderHolder.SetActive(true);
-            _isCharging = true;
-        }
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                if (activeWeapon != null)
+                {
+                    if (_isCharging)
+                    {
+                        ChargeTime();
+                    }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            _battleUICon.shootSliderHolder.SetActive(false);
-            _isCharging = false;
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        _shootMultiTimer = 0;
+                
+                        _battleUICon.shootSliderHolder.SetActive(true);
+                        _isCharging = true;
+                    }
+
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        _battleUICon.shootSliderHolder.SetActive(false);
+                        _isCharging = false;
             
-            Vector3 spawnPoint = transform.position + (transform.forward * 2);
-            activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * 10f, transform.rotation);
+                        Vector3 spawnPoint = transform.position + (transform.forward * 2);
+                        activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * 10f, transform.rotation);
+                    }
+                }
+            }
         }
     }
 
-    public void EquipWeapon()
+    public void EquipWeapon(Weapon toEquip)
     {
+        NoWeaponActive();
+        
+        activeWeapon = toEquip;
+        
         _activeWeaponObj = Instantiate(activeWeapon.weapon, weaponHolder.transform.position, transform.rotation);
         _activeWeaponObj.transform.parent = weaponHolder.transform;
+    }
+
+    public void NoWeaponActive()
+    {
+        activeWeapon = null;
+        
+        Destroy(_activeWeaponObj);
     }
     
     void ChargeTime()
@@ -69,7 +86,6 @@ public class WeaponManager : MonoBehaviour
         {
             case true:
                 _shootMultiTimer += Time.deltaTime;
-                Debug.Log(_shootMultiTimer);
                 if (_shootMultiTimer > maxChargeTime)
                 {
                     _shootMultiTimer = maxChargeTime;
