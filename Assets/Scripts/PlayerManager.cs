@@ -10,8 +10,8 @@ public class PlayerManager : MonoBehaviour
 
     private HealthbarManager _healthBar;
     
-    public int maxHealth = 100;
-    private int _health = 100;
+    public float maxHealth = 100;
+    private float _health = 100;
 
     private void Awake()
     {
@@ -19,28 +19,28 @@ public class PlayerManager : MonoBehaviour
         _healthBar = this.gameObject.GetComponent<HealthbarManager>();
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float dmg)
     {
         _health -= dmg;
         
-        _healthBar.UpdateHealth(_health);
+        _healthBar.UpdateHealth((int)_health);
         
-        if (_health >= 0)
+        if (_health <= 0)
         {
             Die();
         }
     }
 
-    public void Heal(int hp)
+    public void Heal(float hp)
     {
         _health += hp;
-        
-        _healthBar.UpdateHealth(_health);
-        
+
         if (_health > maxHealth)
         {
             _health = maxHealth;
         }
+        
+        _healthBar.UpdateHealth((int)_health);
     }
     
     private void Die()
