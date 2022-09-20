@@ -24,7 +24,9 @@ public class CharacterController : MonoBehaviour
 
     private CameraController _cameraCon;
     private Rigidbody _playerRb;
-    
+
+    [SerializeField] private float rotationSpeed;
+
     private float _inputX;
     private float _inputZ;
 
@@ -32,6 +34,11 @@ public class CharacterController : MonoBehaviour
     private Vector3 _right;
 
     private bool _jump;
+
+    private float _wobbleAmount = 3.5f;
+    private float _wobbleTimer = .4f;
+    private int _wobbleSwitch = 0;
+    
     
     void Start()
     {
@@ -86,6 +93,11 @@ public class CharacterController : MonoBehaviour
         {
             GetInput();
             Move();
+        }
+
+        if (!canMove)
+        {
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
         }
     }
 
@@ -159,8 +171,43 @@ public class CharacterController : MonoBehaviour
             _playerRb.velocity = _playerRb.velocity.normalized * speed;
 
             _playerRb.velocity = new Vector3(_playerRb.velocity.x, yVel, _playerRb.velocity.z);
-        }
+            
+            //Wobble
+            _wobbleTimer -= Time.deltaTime;
+            
+            if (_wobbleTimer <= 0)
+            {
+                if (_wobbleSwitch == 0)
+                {
+                    _wobbleSwitch = 1;
+                }
+                
+                else if (_wobbleSwitch == 1)
+                {
+                    _wobbleSwitch = 0;
+                }
 
+                switch (_wobbleSwitch)
+                {
+                    case 0:
+                        _wobbleTimer = .4f;
+                        _wobbleAmount = 3.5f;
+                        break;
+                    
+                    case 1:
+                        _wobbleTimer = .4f;
+                        _wobbleAmount = -3.5f;
+                        break;
+                }
+            }
+
+            //Rotate towards moveDir + wobble
+            float targetAngle = Mathf.Atan2(_inputX, _inputZ) * Mathf.Rad2Deg + _cameraCon.activeCamera.transform.eulerAngles.y;
+            Quaternion targetRotation = Quaternion.Euler(transform.rotation.x, targetAngle, _wobbleAmount);
+            
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+
+        }
     }
 
 }

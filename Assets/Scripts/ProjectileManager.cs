@@ -6,12 +6,17 @@ using UnityEngine;
 public class ProjectileManager : MonoBehaviour
 {
     [SerializeField] private GameObject hitParticle;
+    
+    private GameObject _planeGenerator;
+    private MeshController _planeMeshCon;
 
     private float _damage;
     
     void Awake()
     {
+        _planeGenerator = GameObject.Find("MeshHolder");
         _damage = GameObject.Find("ActivePlayerController").GetComponent<ActivePlayerController>().activePlayer.GetComponent<WeaponManager>().activeWeapon.damage;
+        _planeMeshCon = _planeGenerator.GetComponent<MeshController>();
     }
 
     private void Update()
@@ -27,6 +32,11 @@ public class ProjectileManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerManager>().TakeDamage(_damage);
+        }
+
+        if (other.CompareTag("Ground"))
+        {
+            _planeMeshCon.DeformMesh(transform.position);
         }
         
         Destroy(this.gameObject);

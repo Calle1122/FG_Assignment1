@@ -946,6 +946,7 @@ MonoBehaviour:
     m_Bits: 128
   groundRayDis: 1
   canMove: 0
+  rotationSpeed: 5
 --- !u!114 &8853860277178101826
 MonoBehaviour:
   m_ObjectHideFlags: 0

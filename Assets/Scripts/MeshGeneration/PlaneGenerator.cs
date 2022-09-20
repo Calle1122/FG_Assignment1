@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -13,13 +15,17 @@ public class PlaneGenerator : MonoBehaviour
     private int[] _tris;
     private Vector3[] _verts;
 
-    void Start()
+    void Awake()
     {
         _mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = _mesh;
-
         GeneratePlane();
         UpdateMesh();
+    }
+    
+    void Start()
+    {
+        
     }
 
     void GeneratePlane()
@@ -68,7 +74,10 @@ public class PlaneGenerator : MonoBehaviour
         _mesh.Clear();
         _mesh.vertices = _verts;
         _mesh.triangles = _tris;
-        
         _mesh.RecalculateNormals();
+
+        gameObject.AddComponent<MeshCollider>().sharedMesh = _mesh;
+
+        this.transform.tag = "Ground";
     }
 }
