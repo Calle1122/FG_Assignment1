@@ -1542,6 +1542,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7185739630468009935, guid: 81238b1f44986974695749578706e2ab, type: 3}
+      propertyPath: numberOfPlayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185739630468009935, guid: 81238b1f44986974695749578706e2ab, type: 3}
+      propertyPath: playerPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185739630468009935, guid: 81238b1f44986974695749578706e2ab, type: 3}
       propertyPath: playerPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 7539606044145050686, guid: 2eabec1cf1a769b42a0ea663ad1c0f3c, type: 3}
