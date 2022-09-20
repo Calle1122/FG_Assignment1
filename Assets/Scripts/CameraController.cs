@@ -8,6 +8,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float cameraSensitivity = 5f;
     [SerializeField] private GameObject camHolderObj;
 
+    [SerializeField] private GameObject battleUIObj;
+    private BattleUIController _battleUICon;
+    
     public Camera activeCamera;
     
     private CameraHolderScript _camHolderMan;
@@ -20,6 +23,7 @@ public class CameraController : MonoBehaviour
 
     void Awake()
     {
+        _battleUICon = battleUIObj.GetComponent<BattleUIController>();
         _camHolderMan = camHolderObj.GetComponent<CameraHolderScript>();
     }
     
@@ -60,6 +64,8 @@ public class CameraController : MonoBehaviour
             firstPersonCam.enabled = true;
             thirdPersonCam.enabled = false;
 
+            _battleUICon.crossHairObj.SetActive(true);
+            
             activeCamera = firstPersonCam;
         }
 
@@ -68,6 +74,8 @@ public class CameraController : MonoBehaviour
             thirdPersonCam.enabled = true;
             firstPersonCam.enabled = false;
 
+            _battleUICon.crossHairObj.SetActive(false);
+            
             activeCamera = thirdPersonCam;
         }
     }

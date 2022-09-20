@@ -54,8 +54,8 @@ public class WeaponManager : MonoBehaviour
                     {
                         _battleUICon.shootSliderHolder.SetActive(false);
                         _isCharging = false;
-            
-                        Vector3 spawnPoint = transform.position + (transform.forward * 2);
+
+                        Vector3 spawnPoint = this.transform.GetChild(0).transform.position + (transform.forward * 1.5f);
                         activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * 10f, transform.rotation);
                     }
                 }

@@ -9,6 +9,8 @@ public class BattleUIController : MonoBehaviour
     public GameObject weaponsMenuHolder;
 
     [SerializeField] private Button bazookaBtn, blasterBtn;
+
+    public GameObject crossHairObj;
     
     public GameObject jumpSliderHolder;
     public Slider jumpSlider;
@@ -21,6 +23,7 @@ public class BattleUIController : MonoBehaviour
         weaponsMenuHolder.SetActive(false);
         jumpSliderHolder.SetActive(false);
         shootSliderHolder.SetActive(false);
+        crossHairObj.SetActive(false);
     }
 
     void Update()
