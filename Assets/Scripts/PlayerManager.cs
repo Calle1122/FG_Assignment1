@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -12,6 +13,8 @@ public class PlayerManager : MonoBehaviour
     
     public float maxHealth = 100;
     private float _health = 100;
+
+    [SerializeField] private GameObject deadRobot;
 
     private void Awake()
     {
@@ -45,7 +48,10 @@ public class PlayerManager : MonoBehaviour
     
     private void Die()
     {
+        this.gameObject.SetActive(false);
+        GameObject deadRobotThing = Instantiate(deadRobot, transform.position, transform.rotation);
+        Destroy(deadRobotThing, 2f);
+        
         Destroy(this.gameObject);
-        Debug.Log(this.transform.name + " was killed.");
     }
 }

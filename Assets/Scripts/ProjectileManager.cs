@@ -34,14 +34,9 @@ public class ProjectileManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerManager>().TakeDamage(_damage);
-
-            if (destroyTerrain)
-            {
-                _planeMeshCon.DeformMesh(transform.position);
-            }
         }
 
-        if (other.CompareTag("Ground") && destroyTerrain)
+        if (destroyTerrain)
         {
             _planeMeshCon.DeformMesh(transform.position);
         }

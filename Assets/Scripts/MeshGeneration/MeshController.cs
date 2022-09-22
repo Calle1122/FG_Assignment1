@@ -64,16 +64,6 @@ public class MeshController : MonoBehaviour
         RecalculateMesh();
     }
 
-    void Update()
-    {
-        
-    }
-
-    void SetMeshColor()
-    {
-        
-    }
-    
     void RecalculateMesh()
     {
         _mesh.vertices = _modifiedVerts;

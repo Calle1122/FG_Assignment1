@@ -46,32 +46,69 @@ public class PlaneGenerator : MonoBehaviour
             for (int x = 0; x <= planeSizeX; x++)
             {
                 _verts[i] = new Vector3(x, 0, z);
+
+                //Slope 2 sides
+                if (x == 0 || z == 0)
+                {
+                    _verts[i] = new Vector3(x, -5.5f, z);
+                }
+                if (x == 1 || z == 1)
+                {
+                    _verts[i] = new Vector3(x, -3.5f, z);
+                }
+                if (x == 2 || z == 2)
+                {
+                    _verts[i] = new Vector3(x, -2f, z);
+                }
+                if (x == 3 || z == 3)
+                {
+                    _verts[i] = new Vector3(x, -0.75f, z);
+                }
+                
+                //Slope other 2 sides
+                if (x == planeSizeX|| z == planeSizeZ)
+                {
+                    _verts[i] = new Vector3(x, -5.5f, z);
+                }
+                if (x == planeSizeX - 1|| z == planeSizeZ - 1)
+                {
+                    _verts[i] = new Vector3(x, -3.5f, z);
+                }
+                if (x == planeSizeX - 2|| z == planeSizeZ - 2)
+                {
+                    _verts[i] = new Vector3(x, -2f, z);
+                }
+                if (x == planeSizeX - 3|| z == planeSizeZ - 3)
+                {
+                    _verts[i] = new Vector3(x, -0.75f, z);
+                }
+                
                 i++;
             }
         }
 
-        int _triCounter = 0;
-        int _vertCounter = 0;
+        int triCounter = 0;
+        int vertCounter = 0;
         
         for (int z = 0; z < planeSizeZ; z++)
         {
             for (int x = 0; x < planeSizeX; x++)
             {
                 //0-2 generates first tri in tile
-                _tris[_triCounter + 0] = _vertCounter + 0;
-                _tris[_triCounter + 1] = _vertCounter + planeSizeZ + 1;
-                _tris[_triCounter + 2] = _vertCounter + 1;
+                _tris[triCounter + 0] = vertCounter + 0;
+                _tris[triCounter + 1] = vertCounter + planeSizeZ + 1;
+                _tris[triCounter + 2] = vertCounter + 1;
                 
                 //3-5 generates second tri in tile
-                _tris[_triCounter + 3] = _vertCounter + 1;
-                _tris[_triCounter + 4] = _vertCounter + planeSizeZ + 1;
-                _tris[_triCounter + 5] = _vertCounter + planeSizeZ + 2;
+                _tris[triCounter + 3] = vertCounter + 1;
+                _tris[triCounter + 4] = vertCounter + planeSizeZ + 1;
+                _tris[triCounter + 5] = vertCounter + planeSizeZ + 2;
 
-                _triCounter += 6;
-                _vertCounter++;
+                triCounter += 6;
+                vertCounter++;
             }
 
-            _vertCounter++;
+            vertCounter++;
         }
 
         _colors = new Color[_verts.Length];
