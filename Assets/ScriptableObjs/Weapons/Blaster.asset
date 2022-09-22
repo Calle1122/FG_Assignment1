@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 7870107419533999349, guid: 0cc56d5f8345db845ae31bcd98339e3a, type: 3}
   projectile: {fileID: 4891464189948282670, guid: b5615027b9d0ad4419c41d29e351d484, type: 3}
-  baseForce: 10
-  damage: 20
+  shouldCharge: 0
+  baseForce: 7.5
+  damage: 15

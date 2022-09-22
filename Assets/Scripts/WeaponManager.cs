@@ -44,21 +44,37 @@ public class WeaponManager : MonoBehaviour
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        _shootMultiTimer = 0;
+                        if (activeWeapon.shouldCharge)
+                        {
+                            _shootMultiTimer = 0;
                 
-                        _battleUICon.shootSliderHolder.SetActive(true);
-                        _isCharging = true;
+                            _battleUICon.shootSliderHolder.SetActive(true);
+                            _isCharging = true;
+                        }
+
+                        else
+                        {
+                            Vector3 spawnPoint = this.transform.GetChild(0).transform.position + (transform.forward * 1.5f);
+                            activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, activeWeapon.baseForce, transform.rotation);
+                        }
+                        
                     }
 
                     if (Input.GetMouseButtonUp(0))
                     {
-                        _battleUICon.shootSliderHolder.SetActive(false);
-                        _isCharging = false;
+                        if (activeWeapon.shouldCharge)
+                        {
+                            _battleUICon.shootSliderHolder.SetActive(false);
+                            _isCharging = false;
 
-                        Vector3 spawnPoint = this.transform.GetChild(0).transform.position + (transform.forward * 1.5f);
-                        activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * 10f, transform.rotation);
+                            Vector3 spawnPoint = this.transform.GetChild(0).transform.position + (transform.forward * 1.5f);
+                            activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * 10f, transform.rotation);
+                        }
+
                     }
+                    
                 }
+                
             }
         }
     }

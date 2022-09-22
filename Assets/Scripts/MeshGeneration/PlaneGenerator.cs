@@ -117,7 +117,7 @@ public class PlaneGenerator : MonoBehaviour
         {
             for (int x = 0; x <= planeSizeX; x++)
             {
-                _colors[i] = grad.Evaluate(.5f);
+                _colors[i] = grad.Evaluate(1f);
                 i++;
             }
         }

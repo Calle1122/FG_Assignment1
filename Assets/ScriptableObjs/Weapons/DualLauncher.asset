@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c371fa4345cfe564fbdfa12c8ca23437, type: 3}
+  m_Name: DualLauncher
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 7870107419533999349, guid: 525b3fc26a18f5e449e676aa8fd3c474, type: 3}
+  projectile: {fileID: 4891464189948282670, guid: b5615027b9d0ad4419c41d29e351d484, type: 3}
+  shouldCharge: 1
+  baseForce: 7.5
+  damage: 20
