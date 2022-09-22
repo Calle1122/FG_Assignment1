@@ -6,6 +6,8 @@ using UnityEngine;
 public class ProjectileManager : MonoBehaviour
 {
     [SerializeField] private GameObject hitParticle;
+
+    public bool destroyTerrain;
     
     private GameObject _planeGenerator;
     private MeshController _planeMeshCon;
@@ -32,9 +34,14 @@ public class ProjectileManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerManager>().TakeDamage(_damage);
+
+            if (destroyTerrain)
+            {
+                _planeMeshCon.DeformMesh(transform.position);
+            }
         }
 
-        if (other.CompareTag("Ground"))
+        if (other.CompareTag("Ground") && destroyTerrain)
         {
             _planeMeshCon.DeformMesh(transform.position);
         }

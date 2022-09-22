@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitParticle: {fileID: 7838595925708794217, guid: 850d4abb98211bf448d544b031ab252d, type: 3}
+  destroyTerrain: 1
 --- !u!33 &42143349284181425
 MeshFilter:
   m_ObjectHideFlags: 0

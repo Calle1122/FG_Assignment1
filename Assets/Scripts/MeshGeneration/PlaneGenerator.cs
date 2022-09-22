@@ -15,6 +15,12 @@ public class PlaneGenerator : MonoBehaviour
     private int[] _tris;
     private Vector3[] _verts;
 
+    public Gradient grad;
+    public Color[] _colors;
+
+    public float _minHeight = -5f;
+    public float _maxHeight = 0f;
+    
     void Awake()
     {
         _mesh = new Mesh();
@@ -67,6 +73,17 @@ public class PlaneGenerator : MonoBehaviour
 
             _vertCounter++;
         }
+
+        _colors = new Color[_verts.Length];
+        
+        for (int i = 0, z = 0; z <= planeSizeZ; z++)
+        {
+            for (int x = 0; x <= planeSizeX; x++)
+            {
+                _colors[i] = grad.Evaluate(.5f);
+                i++;
+            }
+        }
     }
 
     void UpdateMesh()
@@ -74,6 +91,7 @@ public class PlaneGenerator : MonoBehaviour
         _mesh.Clear();
         _mesh.vertices = _verts;
         _mesh.triangles = _tris;
+        _mesh.colors = _colors;
         _mesh.RecalculateNormals();
 
         gameObject.AddComponent<MeshCollider>().sharedMesh = _mesh;

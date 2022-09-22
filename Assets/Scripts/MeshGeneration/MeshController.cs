@@ -11,13 +11,15 @@ public class MeshController : MonoBehaviour
     
     private Mesh _mesh;
     private Vector3[] _verts, _modifiedVerts;
-    
+
+    private PlaneGenerator _planeGen;
+
     void Start()
     {
         _mesh = GetComponentInChildren<MeshFilter>().mesh;
         _verts = _mesh.vertices;
         _modifiedVerts = _mesh.vertices;
-        Debug.Log(_modifiedVerts);
+        _planeGen = GetComponentInChildren<PlaneGenerator>();
     }
 
     public void DeformMesh(Vector3 hitPos)
@@ -30,9 +32,33 @@ public class MeshController : MonoBehaviour
             {
                 float falloff = fallOff.Evaluate(hitDis.magnitude);
                 _modifiedVerts[i] += (Vector3.down * falloff);
+
+                if (_modifiedVerts[i].y < _planeGen._minHeight)
+                {
+                    _modifiedVerts[i].y = _planeGen._minHeight;
+                }
+                
+                //Will be used if I decide to implement adding to the terrain.
+                if (_modifiedVerts[i].y > _planeGen._maxHeight)
+                {
+                    _modifiedVerts[i].y = _planeGen._maxHeight;
+                }
             }
 
             //_modifiedVerts[i] = _modifiedVerts[i] - Vector3.down;
+        }
+        
+        _planeGen._colors = new Color[_verts.Length];
+        
+        for (int i = 0, z = 0; z <= _planeGen.planeSizeZ; z++)
+        {
+            for (int x = 0; x <= _planeGen.planeSizeX; x++)
+            {
+                float vertHeight = Mathf.InverseLerp(_planeGen._minHeight, _planeGen._maxHeight, _modifiedVerts[i].y);
+
+                _planeGen._colors[i] = _planeGen.grad.Evaluate(vertHeight);
+                i++;
+            }
         }
         
         RecalculateMesh();
@@ -42,10 +68,16 @@ public class MeshController : MonoBehaviour
     {
         
     }
+
+    void SetMeshColor()
+    {
+        
+    }
     
     void RecalculateMesh()
     {
         _mesh.vertices = _modifiedVerts;
+        _mesh.colors = _planeGen._colors;
         _mesh.UploadMeshData(false);
         GetComponentInChildren<MeshCollider>().sharedMesh = _mesh;
         _mesh.RecalculateNormals();
