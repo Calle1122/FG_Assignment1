@@ -13,9 +13,18 @@ public class DeadRobot : MonoBehaviour
     private float _wobbleTimer = .4f;
     private int _wobbleSwitch = 0;
 
+    private Vector3 _targetEulerRot;
+
+    private GameObject _activePlayer;
+    private float _yRot;
+
     private void OnEnable()
     {
+        _activePlayer = GameObject.Find("ActivePlayerController").GetComponent<ActivePlayerController>().activePlayer;
         _playAnimation = true;
+        
+        transform.LookAt(_activePlayer.transform.position, Vector3.up);
+        _yRot = transform.rotation.eulerAngles.y;
     }
 
     private void Update()
@@ -52,9 +61,10 @@ public class DeadRobot : MonoBehaviour
                 }
             }
             
-            Quaternion targetRotation = Quaternion.Euler(transform.rotation.x, transform.position.y, _wobbleAmount);
+            Quaternion targetRotation = Quaternion.Euler(transform.rotation.x, _yRot,_wobbleAmount);
             
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            
         }
     }
 }

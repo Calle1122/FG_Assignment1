@@ -48,8 +48,8 @@ public class PlayerManager : MonoBehaviour
     
     private void Die()
     {
-        this.gameObject.SetActive(false);
         GameObject deadRobotThing = Instantiate(deadRobot, transform.position, transform.rotation);
+        this.gameObject.SetActive(false);
         Destroy(deadRobotThing, 2f);
         
         Destroy(this.gameObject);

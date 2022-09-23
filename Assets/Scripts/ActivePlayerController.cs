@@ -49,6 +49,20 @@ public class ActivePlayerController : MonoBehaviour
         {
             NextPlayerActive();
         }
+
+        foreach (CharacterController charCon in _allCharacterControllers)
+        {
+            if (charCon != null)
+            {
+                if (charCon.gameObject != activePlayer)
+                {
+                    charCon.gameObject.transform.LookAt(activePlayer.transform.position, Vector3.up);
+                    float yRot = charCon.gameObject.transform.rotation.eulerAngles.y;
+                    charCon.gameObject.transform.rotation = Quaternion.Euler(0, yRot, 0);
+                    
+                }
+            }
+        }
     }
 
     void NextPlayerActive()
