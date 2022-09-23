@@ -3468,7 +3468,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 45, y: -10, z: 0}
 --- !u!1001 &714185067
 PrefabInstance:
@@ -6546,6 +6546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleManObj: {fileID: 1095761760}
   cameraContObj: {fileID: 1948480621}
+  secondsBeforeKinematic: 1
   allPlayerManagers: []
   activePlayer: {fileID: 0}
 --- !u!4 &1275235618
@@ -10769,7 +10770,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1961966370
 PrefabInstance:
@@ -11277,7 +11278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 884340521958870337, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 884340521958870337, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
       propertyPath: m_AnchorMax.x
@@ -11386,7 +11387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7185739630468009934, guid: 81238b1f44986974695749578706e2ab, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7185739630468009934, guid: 81238b1f44986974695749578706e2ab, type: 3}
       propertyPath: m_LocalPosition.x

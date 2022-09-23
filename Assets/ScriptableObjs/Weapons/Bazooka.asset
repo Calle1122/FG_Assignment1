@@ -15,5 +15,7 @@ MonoBehaviour:
   weapon: {fileID: 7870107419533999349, guid: e8295f66f17fd9143a7a4f6c442f2953, type: 3}
   projectile: {fileID: 4891464189948282670, guid: 3b536774b9ba40d4fb1833f0a15bc2ff, type: 3}
   shouldCharge: 1
+  splashDamage: 1
+  splashRadius: 4
   baseForce: 5
   damage: 25

@@ -21,6 +21,7 @@ public class WeaponManager : MonoBehaviour
     private CameraController _cameraCon;
     
     [SerializeField] private GameObject weaponHolder;
+    [SerializeField] private GameObject dualPos1, dualPos2;
 
     private void Start()
     {
@@ -67,8 +68,21 @@ public class WeaponManager : MonoBehaviour
                             _battleUICon.shootSliderHolder.SetActive(false);
                             _isCharging = false;
 
-                            Vector3 spawnPoint = this.transform.GetChild(0).transform.position + (transform.forward * 1.5f);
-                            activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * 10f, transform.rotation);
+                            if (activeWeapon.doubleShot)
+                            {
+                                Vector3 spawnPoint = dualPos1.transform.position + (transform.forward * 1.5f);
+                                activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * activeWeapon.baseForce, transform.rotation);
+                                spawnPoint = dualPos2.transform.position + (transform.forward * 1.5f);
+                                activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * activeWeapon.baseForce, transform.rotation);
+                            }
+
+
+                            else
+                            {
+                                Vector3 spawnPoint = this.transform.GetChild(0).transform.position + (transform.forward * 1.5f);
+                                activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * activeWeapon.baseForce, transform.rotation);
+                            }
+                            
                         }
 
                     }

@@ -9,6 +9,8 @@ public class Weapon : ScriptableObject
     public GameObject weapon;
     public GameObject projectile;
 
+    public bool doubleShot;
+    
     public bool shouldCharge;
     
     public float baseForce;

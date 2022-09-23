@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: DualLauncher
   m_EditorClassIdentifier: 
   weapon: {fileID: 7870107419533999349, guid: 525b3fc26a18f5e449e676aa8fd3c474, type: 3}
-  projectile: {fileID: 4891464189948282670, guid: b5615027b9d0ad4419c41d29e351d484, type: 3}
+  projectile: {fileID: 4891464189948282670, guid: 9d9fd4237dda90744be4c17fcd8554be, type: 3}
+  doubleShot: 1
   shouldCharge: 1
   baseForce: 7.5
-  damage: 20
+  damage: 15

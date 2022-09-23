@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CharacterController : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class CharacterController : MonoBehaviour
     public bool canMove = false;
 
     private CameraController _cameraCon;
-    private Rigidbody _playerRb;
+    public Rigidbody playerRb;
 
     [SerializeField] private float rotationSpeed;
 
@@ -33,18 +34,18 @@ public class CharacterController : MonoBehaviour
     private Vector3 _forward;
     private Vector3 _right;
 
-    private bool _jump;
+    public bool jump;
 
     private float _wobbleAmount = 3.5f;
     private float _wobbleTimer = .4f;
     private int _wobbleSwitch = 0;
     
     
-    void Start()
+    void Awake()
     {
         _cameraConObj = GameObject.Find("CameraController");
         _cameraCon = _cameraConObj.GetComponent<CameraController>();
-        _playerRb = GetComponent<Rigidbody>();
+        playerRb = GetComponent<Rigidbody>();
         _battleUICon = GameObject.Find("BattleUIController").GetComponent<BattleUIController>();
     }
     
@@ -60,16 +61,16 @@ public class CharacterController : MonoBehaviour
 
         if (Physics.SphereCast(transform.position, .2f, Vector3.down, out hit, groundRayDis, groundLayer))
         {
-            _jump = false;
+            jump = false;
         }
         else
         {
-            _jump = true;
+            jump = true;
         }
 
         if (canMove)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && _jump == false)
+            if (Input.GetKeyDown(KeyCode.Space) && jump == false)
             {
                 _jumpMultiTimer = 0;
                 
@@ -77,11 +78,11 @@ public class CharacterController : MonoBehaviour
                 _isCharging = true;
             }
             
-            if (Input.GetKeyUp(KeyCode.Space) && _jump == false)
+            if (Input.GetKeyUp(KeyCode.Space) && jump == false)
             {
                 _battleUICon.jumpSliderHolder.SetActive(false);
                 _isCharging = false;
-                _playerRb.AddForce(Vector3.up * jumpForce * (_jumpMultiTimer + 1), ForceMode.Impulse);
+                playerRb.AddForce(Vector3.up * jumpForce * (_jumpMultiTimer + 1), ForceMode.Impulse);
             }
         }
 
@@ -165,12 +166,12 @@ public class CharacterController : MonoBehaviour
         
         if (inputZX.magnitude > .1f)
         {
-            float yVel = _playerRb.velocity.y;
+            float yVel = playerRb.velocity.y;
             
-            _playerRb.AddForce(moveDir * speed, ForceMode.VelocityChange);
-            _playerRb.velocity = _playerRb.velocity.normalized * speed;
+            playerRb.AddForce(moveDir * speed, ForceMode.VelocityChange);
+            playerRb.velocity = playerRb.velocity.normalized * speed;
 
-            _playerRb.velocity = new Vector3(_playerRb.velocity.x, yVel, _playerRb.velocity.z);
+            playerRb.velocity = new Vector3(playerRb.velocity.x, yVel, playerRb.velocity.z);
             
             //Wobble
             _wobbleTimer -= Time.deltaTime;
