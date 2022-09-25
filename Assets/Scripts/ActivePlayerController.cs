@@ -13,6 +13,9 @@ public class ActivePlayerController : MonoBehaviour
     
     public PlayerManager[] allPlayerManagers;
     public GameObject activePlayer;
+    
+    public float turnTimer;
+    public float currentTurnTimer;
 
     private CharacterController[] _allCharacterControllers;
     private WeaponManager[] _allWeaponManagers;
@@ -32,6 +35,8 @@ public class ActivePlayerController : MonoBehaviour
 
     void Start()
     {
+        currentTurnTimer = turnTimer;
+        
         _kinTimer = 0;
         
         for (int i = 0; i < allPlayerManagers.Length; i++)
@@ -51,11 +56,29 @@ public class ActivePlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
+        //Used for testing
+        /*if (Input.GetKeyDown(KeyCode.N))
         {
-            NextPlayerActive();
-        }
+            NewTurn();
+        }*/
+        
+        NonActiveHandling();
 
+        currentTurnTimer -= Time.deltaTime;
+        if (currentTurnTimer <= 0)
+        {
+            NewTurn();
+        }
+    }
+
+    public void NewTurn()
+    {
+        currentTurnTimer = turnTimer;
+        NextPlayerActive();
+    }
+    
+    private void NonActiveHandling()
+    {
         foreach (CharacterController charCon in _allCharacterControllers)
         {
             if (charCon != null)
@@ -87,7 +110,7 @@ public class ActivePlayerController : MonoBehaviour
             }
         }
     }
-
+    
     public void ResetGroundTimer()
     {
         _kinTimer = secondsBeforeKinematic;

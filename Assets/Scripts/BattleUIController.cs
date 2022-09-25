@@ -8,8 +8,12 @@ public class BattleUIController : MonoBehaviour
 {
     public GameObject weaponsMenuHolder;
 
+    [SerializeField] private TextMeshProUGUI turnTimerTxt;
     [SerializeField] private Button bazookaBtn, blasterBtn;
 
+    [SerializeField] private GameObject activePlayerManager;
+    private ActivePlayerController _activePlayerController;
+    
     public GameObject crossHairObj;
     
     public GameObject jumpSliderHolder;
@@ -24,10 +28,17 @@ public class BattleUIController : MonoBehaviour
         jumpSliderHolder.SetActive(false);
         shootSliderHolder.SetActive(false);
         crossHairObj.SetActive(false);
+
+        _activePlayerController = activePlayerManager.GetComponent<ActivePlayerController>();
     }
 
     void Update()
     {
+        //Turn txt
+        int currentTime = (int)_activePlayerController.currentTurnTimer;
+        turnTimerTxt.text = currentTime.ToString();
+
+        //Weapons Menu
         if (Input.GetKeyDown(KeyCode.E))
         {
             weaponsMenuHolder.SetActive(true);

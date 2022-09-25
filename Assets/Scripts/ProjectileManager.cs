@@ -42,7 +42,7 @@ public class ProjectileManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_hasDealtDamage == false)
+        if (_hasDealtDamage == false && other.transform.CompareTag("Pickup") == false)
         {
             GameObject newHitParticle = Instantiate(hitParticle, transform.position, hitParticle.transform.rotation);
             Destroy(newHitParticle, 1f);
