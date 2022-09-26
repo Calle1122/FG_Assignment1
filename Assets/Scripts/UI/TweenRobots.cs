@@ -37,8 +37,8 @@ public class TweenRobots : MonoBehaviour
         robots[2].transform.DOMove(pos3.transform.position, .5f);
         robots[3].transform.DOMove(pos4.transform.position, .5f);
 
-        robots[0].transform.DOMove(pos1.transform.position + new Vector3(0, 75f, 0), 0.5f);
-        robots[1].transform.DOMove(pos2.transform.position + new Vector3(0, 75f, 0), 0.5f);
+        robots[0].transform.DOMove(pos1.transform.position + new Vector3(0, 115f, 0), 0.5f);
+        robots[1].transform.DOMove(pos2.transform.position + new Vector3(0, 115f, 0), 0.5f);
     }
 
     public void EnableThree()
@@ -47,18 +47,18 @@ public class TweenRobots : MonoBehaviour
         
         robots[3].transform.DOMove(pos4.transform.position, .5f);
 
-        robots[0].transform.DOMove(pos1.transform.position + new Vector3(0, 75f, 0), 0.5f);
-        robots[1].transform.DOMove(pos2.transform.position + new Vector3(0, 75f, 0), 0.5f);
-        robots[2].transform.DOMove(pos3.transform.position + new Vector3(0, 75f, 0), 0.5f);
+        robots[0].transform.DOMove(pos1.transform.position + new Vector3(0, 115f, 0), 0.5f);
+        robots[1].transform.DOMove(pos2.transform.position + new Vector3(0, 115f, 0), 0.5f);
+        robots[2].transform.DOMove(pos3.transform.position + new Vector3(0, 115f, 0), 0.5f);
     }
 
     public void EnableFour()
     {
         createLobbyBtn.interactable = true;
         
-        robots[0].transform.DOMove(pos1.transform.position + new Vector3(0, 75f, 0), 0.5f);
-        robots[1].transform.DOMove(pos2.transform.position + new Vector3(0, 75f, 0), 0.5f);
-        robots[2].transform.DOMove(pos3.transform.position + new Vector3(0, 75f, 0), 0.5f);
-        robots[3].transform.DOMove(pos4.transform.position + new Vector3(0, 75f, 0), 0.5f);
+        robots[0].transform.DOMove(pos1.transform.position + new Vector3(0, 115f, 0), 0.5f);
+        robots[1].transform.DOMove(pos2.transform.position + new Vector3(0, 115f, 0), 0.5f);
+        robots[2].transform.DOMove(pos3.transform.position + new Vector3(0, 115f, 0), 0.5f);
+        robots[3].transform.DOMove(pos4.transform.position + new Vector3(0, 115f, 0), 0.5f);
     }
 }
