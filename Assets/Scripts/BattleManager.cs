@@ -14,17 +14,18 @@ public class BattleManager : MonoBehaviour
     void Awake()
     {
         _gameMan = gameManagerObj.GetComponent<GameManager>();
-
+        
         allPlayers = new GameObject[_gameMan.numberOfPlayer];
     }
     
     void Start()
     {
-
         for (int i = 0; i < _gameMan.numberOfPlayer; i++)
         {
             GameObject newPlayer = Instantiate(_gameMan.playerPrefabs[i], spawnPoints[i].transform.position, Quaternion.identity);
             allPlayers[i] = newPlayer;
+            newPlayer.GetComponent<PlayerManager>().face.sprite = GameSettings.GameSettingsInstance.playerFaces[i];
+            newPlayer.GetComponent<PlayerManager>().nameTxt.text = GameSettings.GameSettingsInstance.playerNames[i];
         }
         
     }

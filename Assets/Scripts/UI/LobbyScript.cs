@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LobbyScript : MonoBehaviour
 {
@@ -43,6 +44,11 @@ public class LobbyScript : MonoBehaviour
         
         nameP3.SetActive(true);
         nameP4.SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
     }
 
 }

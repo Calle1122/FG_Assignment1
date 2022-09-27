@@ -55,4 +55,16 @@ public class MenuMover : MonoBehaviour
         playMenu.transform.DOMove(_middlePos, 1f);
         lobbyMenu.transform.DOMove(downPos.transform.position, 1f);
     }
+
+    public void MainToSettings()
+    {
+        mainMenu.transform.DOMove(rightPos.transform.position, 1f);
+        settingsMenu.transform.DOMove(_middlePos, 1f);
+    }
+
+    public void SettingsToMain()
+    {
+        mainMenu.transform.DOMove(_middlePos, 1f);
+        settingsMenu.transform.DOMove(leftPos.transform.position, 1f);
+    }
 }
