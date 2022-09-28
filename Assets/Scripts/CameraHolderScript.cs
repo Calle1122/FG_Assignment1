@@ -22,7 +22,11 @@ public class CameraHolderScript : MonoBehaviour
 
     void Update()
     {
-        transform.position = _transformToFocus.position;
+        if (_activeMan.activePlayer != null)
+        {
+            transform.position = _transformToFocus.position;
+        }
+        
     }
     
     public void SetCameraFocus()

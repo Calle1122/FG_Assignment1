@@ -7,6 +7,7 @@ public class ActivePlayerController : MonoBehaviour
 
     [SerializeField] private GameObject battleManObj;
     [SerializeField] private GameObject cameraContObj;
+    [SerializeField] private GameObject battleUIObj;
 
     [SerializeField] private float secondsBeforeKinematic;
     private float _kinTimer;
@@ -22,7 +23,10 @@ public class ActivePlayerController : MonoBehaviour
     
     private BattleManager _battleMan;
     private CameraController _cameraCont;
+    private BattleUIController _uiCon;
     private int _activePlayerIndex = 0;
+
+    private bool _hasChosen;
 
     void Awake()
     {
@@ -31,6 +35,7 @@ public class ActivePlayerController : MonoBehaviour
         _cameraCont = cameraContObj.GetComponent<CameraController>();
         _allCharacterControllers = new CharacterController[_battleMan.allPlayers.Length];
         _allWeaponManagers = new WeaponManager[_battleMan.allPlayers.Length];
+        _uiCon = battleUIObj.GetComponent<BattleUIController>();
     }
 
     void Start()
@@ -46,22 +51,19 @@ public class ActivePlayerController : MonoBehaviour
             _allWeaponManagers[i] = _battleMan.allPlayers[i].GetComponent<WeaponManager>();
         }
 
-        activePlayer = allPlayerManagers[_activePlayerIndex].gameObject;
-        _allCharacterControllers[_activePlayerIndex].canMove = true;
-        _allCharacterControllers[_activePlayerIndex].playerRb.isKinematic = false;
-        _allWeaponManagers[_activePlayerIndex].canShoot = true;
+        _activePlayerIndex = GameSettings.GameSettingsInstance.numberOfPlayers - 1;
+        activePlayer = allPlayerManagers[GameSettings.GameSettingsInstance.numberOfPlayers - 1].gameObject;
+        _allCharacterControllers[GameSettings.GameSettingsInstance.numberOfPlayers - 1].canMove = true;
+        _allCharacterControllers[GameSettings.GameSettingsInstance.numberOfPlayers - 1].playerRb.isKinematic = false;
+        _allWeaponManagers[GameSettings.GameSettingsInstance.numberOfPlayers - 1].canShoot = true;
         
         _cameraCont.UpdateCameraTarget(activePlayer);
+
+        currentTurnTimer = 0.1f;
     }
 
     void Update()
     {
-        //Used for testing
-        /*if (Input.GetKeyDown(KeyCode.N))
-        {
-            NewTurn();
-        }*/
-        
         NonActiveHandling();
 
         currentTurnTimer -= Time.deltaTime;
@@ -73,42 +75,94 @@ public class ActivePlayerController : MonoBehaviour
 
     public void NewTurn()
     {
+        BetweenTurn();
+    }
+
+    void BetweenTurn()
+    {
+        while (_hasChosen == false)
+        {
+            GameSettings.GameSettingsInstance.playerToDisplay += 1;
+            if (GameSettings.GameSettingsInstance.playerToDisplay == GameSettings.GameSettingsInstance.numberOfPlayers)
+            {
+                GameSettings.GameSettingsInstance.playerToDisplay = 0;
+            }
+
+            if (allPlayerManagers[GameSettings.GameSettingsInstance.playerToDisplay] != null)
+            {
+                _hasChosen = true;
+            }
+        }
+        
+        _uiCon.UpdateBetweenTurnsInfo();
+
+        _uiCon.betweenTurnHolder.SetActive(true);
+        _uiCon.timerHolder.SetActive(false);
+        
+        _cameraCont.firstPersonCam.enabled = false;
+        _cameraCont.thirdPersonCam.enabled = false;
+
+        _cameraCont.skyCamera.enabled = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        _allCharacterControllers[_activePlayerIndex].canMove = false;
+    }
+
+    public void StartTurn()
+    {
+        _uiCon.betweenTurnHolder.SetActive(false);
+        _uiCon.timerHolder.SetActive(true);
+
+        _cameraCont.skyCamera.enabled = false;
+        _cameraCont.thirdPersonCam.enabled = true;
+        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
         currentTurnTimer = turnTimer;
         NextPlayerActive();
+        _hasChosen = false;
     }
     
     private void NonActiveHandling()
     {
-        foreach (CharacterController charCon in _allCharacterControllers)
+        if (activePlayer != null)
         {
-            if (charCon != null)
+            foreach (CharacterController charCon in _allCharacterControllers)
             {
-                
-                //For all non-active players:
-                
-                if (charCon.gameObject != activePlayer)
+                if (charCon != null)
                 {
-                    charCon.gameObject.transform.LookAt(activePlayer.transform.position, Vector3.up);
-                    float yRot = charCon.gameObject.transform.rotation.eulerAngles.y;
-                    charCon.gameObject.transform.rotation = Quaternion.Euler(0, yRot, 0);
-
-                    if (charCon.jump)
+                
+                    //For all non-active players:
+                
+                    if (charCon.gameObject != activePlayer)
                     {
-                        charCon.playerRb.isKinematic = false;
-                        _kinTimer = secondsBeforeKinematic;
-                    }
+                        charCon.gameObject.transform.LookAt(activePlayer.transform.position, Vector3.up);
+                        float yRot = charCon.gameObject.transform.rotation.eulerAngles.y;
+                        charCon.gameObject.transform.rotation = Quaternion.Euler(0, yRot, 0);
 
-                    else
-                    {
-                        _kinTimer -= Time.deltaTime;
-                        if (_kinTimer < 0)
+                        if (charCon.jump)
                         {
-                            charCon.playerRb.isKinematic = true;
+                            charCon.playerRb.isKinematic = false;
+                            _kinTimer = secondsBeforeKinematic;
+                        }
+
+                        else
+                        {
+                            _kinTimer -= Time.deltaTime;
+                            if (_kinTimer < 0)
+                            {
+                                charCon.playerRb.isKinematic = true;
+                            }
                         }
                     }
                 }
             }
         }
+        
+        
     }
     
     public void ResetGroundTimer()
@@ -116,13 +170,14 @@ public class ActivePlayerController : MonoBehaviour
         _kinTimer = secondsBeforeKinematic;
     }
     
-    void NextPlayerActive()
+    public void NextPlayerActive()
     {
         bool hasSelected = false;
         
         _allCharacterControllers[_activePlayerIndex].canMove = false;
         //_allCharacterControllers[_activePlayerIndex].playerRb.isKinematic = true;
         _allWeaponManagers[_activePlayerIndex].canShoot = false;
+        _allWeaponManagers[_activePlayerIndex].NoWeaponActive();
 
         while (hasSelected == false)
         {

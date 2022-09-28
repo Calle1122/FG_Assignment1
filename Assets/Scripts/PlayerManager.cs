@@ -56,6 +56,8 @@ public class PlayerManager : MonoBehaviour
         GameObject deadRobotThing = Instantiate(deadRobot, transform.position, transform.rotation);
         this.gameObject.SetActive(false);
         Destroy(deadRobotThing, 2f);
+
+        GameObject.Find("ActivePlayerController").GetComponent<ActivePlayerController>().NewTurn();
         
         Destroy(this.gameObject);
     }

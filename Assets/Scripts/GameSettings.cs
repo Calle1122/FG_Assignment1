@@ -9,6 +9,8 @@ public class GameSettings : MonoBehaviour
 
     public int numberOfPlayers;
     public bool shouldLogName = true;
+
+    public int playerToDisplay;
     
     public string[] playerNames;
     public Sprite[] playerFaces;
@@ -18,6 +20,8 @@ public class GameSettings : MonoBehaviour
     private bool _hasInitialSetup = false;
     private void Awake()
     {
+        playerToDisplay = -1;
+        
         if (GameSettingsInstance == null)
         {
             GameSettingsInstance = this;

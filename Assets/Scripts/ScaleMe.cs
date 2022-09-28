@@ -12,8 +12,6 @@ public class ScaleMe : MonoBehaviour
 
     private IEnumerator BlastScale(Transform objectToScale, float splashRadius)
     {
-        Debug.Log("hello");
-
         float percent = 0f;
 
         Vector3 startScale = objectToScale.localScale;
@@ -21,7 +19,6 @@ public class ScaleMe : MonoBehaviour
         
         while (percent < 1f)
         {
-            Debug.Log("in loop");
             percent += Time.deltaTime * 5f;
 
             objectToScale.transform.localScale = Vector3.Lerp(startScale,

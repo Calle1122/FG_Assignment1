@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private float cameraSensitivity = 5f;
     [SerializeField] private GameObject camHolderObj;
+    [SerializeField] private GameObject skyCamRotator;
 
     [SerializeField] private GameObject battleUIObj;
     private BattleUIController _battleUICon;
@@ -15,7 +16,7 @@ public class CameraController : MonoBehaviour
     
     private CameraHolderScript _camHolderMan;
 
-    public Camera thirdPersonCam, firstPersonCam;
+    public Camera thirdPersonCam, firstPersonCam, skyCamera;
 
     private float _rotationX, _rotationY;
     private Transform _playerTransform;
@@ -33,12 +34,15 @@ public class CameraController : MonoBehaviour
         Cursor.visible = false;
 
         firstPersonCam.enabled = false;
+        skyCamera.enabled = false;
         activeCamera = thirdPersonCam;
     }
 
     void Update()
     {
         ChangeCamera();
+        
+        skyCamRotator.transform.Rotate(Vector3.up, 15f * Time.deltaTime);
         
         if (thirdPersonCam.enabled)
         {
@@ -104,8 +108,8 @@ public class CameraController : MonoBehaviour
         _rotationX -= yMouse;
         _rotationY += xMouse;
 
-        //Make sure player can't look up or down more than 90 degrees.
-        _rotationX = Mathf.Clamp(_rotationX, -90f, 90f);
+        //Make sure player can't look up or down into self
+        _rotationX = Mathf.Clamp(_rotationX, -65f, 75f);
         
         //Rotate camera and player
         firstPersonCam.transform.rotation = Quaternion.Euler(_rotationX, _rotationY, 0);
