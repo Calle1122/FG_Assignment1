@@ -1,5 +1,6 @@
 
-using System;
+
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -17,9 +18,12 @@ public class GameSettings : MonoBehaviour
     public string[] playerNames;
     public Sprite[] playerFaces;
 
+    public Queue<string> deadNameQueue;
+    public Queue<Sprite> deadFaceQueue;
+
     [SerializeField] private Sprite defaultFace;
 
-    private bool _hasInitialSetup = false;
+    //private bool _hasInitialSetup = false;
     private void Awake()
     {
         playerToDisplay = -1;
@@ -35,15 +39,18 @@ public class GameSettings : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void EnqueueLastPlayer()
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        for (int i = 0; i < numberOfPlayers; i++)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            if (!deadNameQueue.Contains(playerNames[i]))
+            {
+                deadNameQueue.Enqueue(playerNames[i]);
+                deadFaceQueue.Enqueue(playerFaces[i]);
+            }
         }
     }
-
+    
     public void SetupArrays()
     {
         /*if (_hasInitialSetup)
@@ -94,6 +101,12 @@ public class GameSettings : MonoBehaviour
         }*/
     }
 
+    public void ClearQueues()
+    {
+        deadFaceQueue.Clear();
+        deadNameQueue.Clear();
+    }
+    
     public void LogFace(int playerNumber, Sprite face)
     {
         playerFaces[playerNumber - 1] = face;

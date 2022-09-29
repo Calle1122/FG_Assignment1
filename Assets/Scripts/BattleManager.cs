@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
@@ -15,7 +14,7 @@ public class BattleManager : MonoBehaviour
     {
         _gameMan = gameManagerObj.GetComponent<GameManager>();
         
-        allPlayers = new GameObject[_gameMan.numberOfPlayer];
+        allPlayers = new GameObject[GameSettings.GameSettingsInstance.numberOfPlayers];
     }
     
     void Start()

@@ -64,10 +64,15 @@ public class PlayerManager : MonoBehaviour
             GameObject.Find("ActivePlayerController").GetComponent<ActivePlayerController>().NewTurn();
         }
 
+        GameSettings.GameSettingsInstance.deadFaceQueue.Enqueue(face.sprite);
+        GameSettings.GameSettingsInstance.deadNameQueue.Enqueue(nameTxt.text);
+        
         GameSettings.GameSettingsInstance.deadPlayers++;
 
         if (GameSettings.GameSettingsInstance.deadPlayers >= GameSettings.GameSettingsInstance.numberOfPlayers - 1)
         {
+            GameSettings.GameSettingsInstance.EnqueueLastPlayer();
+            
             //Load GameOver Scene
             SceneManager.LoadScene(2);
         }

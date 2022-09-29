@@ -29,11 +29,12 @@ public class ActivePlayerController : MonoBehaviour
 
     void Awake()
     {
+        //used earliear: _battleMan.allPlayers.Length
         _battleMan = battleManObj.GetComponent<BattleManager>();
-        allPlayerManagers = new PlayerManager[_battleMan.allPlayers.Length];
+        allPlayerManagers = new PlayerManager[GameSettings.GameSettingsInstance.numberOfPlayers];
         _cameraCont = cameraContObj.GetComponent<CameraController>();
-        _allCharacterControllers = new CharacterController[_battleMan.allPlayers.Length];
-        _allWeaponManagers = new WeaponManager[_battleMan.allPlayers.Length];
+        _allCharacterControllers = new CharacterController[GameSettings.GameSettingsInstance.numberOfPlayers];
+        _allWeaponManagers = new WeaponManager[GameSettings.GameSettingsInstance.numberOfPlayers];
         _uiCon = battleUIObj.GetComponent<BattleUIController>();
     }
 

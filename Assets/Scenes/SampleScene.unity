@@ -2292,8 +2292,10 @@ MonoBehaviour:
   activeFacesHolder: {fileID: 2003306437}
   chargeHolder: {fileID: 2003306436}
   turnTimerTxt: {fileID: 1952060662}
-  bazookaBtn: {fileID: 0}
-  blasterBtn: {fileID: 0}
+  bazookaBtn: {fileID: 1229644206}
+  blasterBtn: {fileID: 1229644205}
+  noWeapBtn: {fileID: 1229644204}
+  dualBtn: {fileID: 1229644203}
   turnPlayerTxt: {fileID: 1991430851}
   turnPlayerFace: {fileID: 71249916}
   charge1: {fileID: 2003306435}
@@ -6550,6 +6552,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2440706f8200b374cbe5a7466b6c7fdc, type: 3}
+--- !u!114 &1229644203 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6700817969584192179, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+  m_PrefabInstance: {fileID: 884340520499564022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1229644204 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 884340521582082905, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+  m_PrefabInstance: {fileID: 884340520499564022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1229644205 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 884340520182274817, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+  m_PrefabInstance: {fileID: 884340520499564022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1229644206 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 884340521283672302, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+  m_PrefabInstance: {fileID: 884340520499564022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1230803060
 GameObject:
   m_ObjectHideFlags: 0

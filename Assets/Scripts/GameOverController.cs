@@ -1,9 +1,13 @@
-
+using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameOverController : MonoBehaviour
 {
+    [SerializeField] private Image[] facesLastToFirst;
+    [SerializeField] private TextMeshProUGUI[] namesLastToFirst;
+    
     private void Start()
     {
         Cursor.visible = true;

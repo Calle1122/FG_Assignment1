@@ -629,6 +629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b33071f18a97d148a4ad154cd79af7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuCanv: {fileID: 304346223}
   activeP3: {fileID: 982681182}
   activeP4: {fileID: 2013436054}
   inActiveP3: {fileID: 1957969068}
@@ -1886,6 +1887,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfPlayers: 0
   shouldLogName: 1
+  deadPlayers: 0
+  playerToDisplay: 0
   playerNames: []
   playerFaces: []
   defaultFace: {fileID: 21300000, guid: 8bf144e6739b39b4e8dc7688973d73f8, type: 3}
@@ -3291,8 +3294,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &642563548
 GameObject:
@@ -7167,7 +7170,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 1.4
 --- !u!222 &1288800648
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7564,7 +7567,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 1.4
 --- !u!222 &1403003406
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8456,7 +8459,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 1.4
 --- !u!222 &1618872246
 CanvasRenderer:
   m_ObjectHideFlags: 0
