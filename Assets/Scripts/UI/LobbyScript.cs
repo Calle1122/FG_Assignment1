@@ -48,6 +48,7 @@ public class LobbyScript : MonoBehaviour
 
     public void StartGame()
     {
+        GameSettings.GameSettingsInstance.deadPlayers = 0;
         SceneManager.LoadScene(1);
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float cameraSensitivity = 5f;
     [SerializeField] private GameObject camHolderObj;
     [SerializeField] private GameObject skyCamRotator;
+    [SerializeField] private GameObject thirdPersonTarget;
+    [SerializeField] private float thirdPersonCamDistance = 5f;
 
     [SerializeField] private GameObject battleUIObj;
     private BattleUIController _battleUICon;
@@ -57,6 +60,24 @@ public class CameraController : MonoBehaviour
             if (Cursor.lockState == CursorLockMode.Locked)
             {
                 MoveFirstPersonCamera();
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (thirdPersonCam.enabled)
+        {
+            RaycastHit cameraHit;
+            Physics.SphereCast(_playerTransform.position, .75f, (thirdPersonTarget.transform.position - _playerTransform.position).normalized, out cameraHit, thirdPersonCamDistance);
+
+            if (cameraHit.collider != null)
+            {
+                thirdPersonCam.transform.position = cameraHit.point;
+            }
+            else
+            {
+                thirdPersonCam.transform.position = _playerTransform.position + (thirdPersonTarget.transform.position - _playerTransform.position).normalized * (thirdPersonCamDistance * 0.9f);
             }
         }
     }

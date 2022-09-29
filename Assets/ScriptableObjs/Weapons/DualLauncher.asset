@@ -16,5 +16,6 @@ MonoBehaviour:
   projectile: {fileID: 4891464189948282670, guid: 9d9fd4237dda90744be4c17fcd8554be, type: 3}
   doubleShot: 1
   shouldCharge: 1
+  chargesToUse: 2
   baseForce: 7
   damage: 15

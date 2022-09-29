@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameSettings : MonoBehaviour
@@ -10,6 +11,8 @@ public class GameSettings : MonoBehaviour
     public int numberOfPlayers;
     public bool shouldLogName = true;
 
+    public int deadPlayers;
+    
     public int playerToDisplay;
     
     public string[] playerNames;

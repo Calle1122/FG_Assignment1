@@ -64,6 +64,11 @@ public class ActivePlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            NewTurn();
+        }
+        
         NonActiveHandling();
 
         currentTurnTimer -= Time.deltaTime;
@@ -98,7 +103,9 @@ public class ActivePlayerController : MonoBehaviour
 
         _uiCon.betweenTurnHolder.SetActive(true);
         _uiCon.timerHolder.SetActive(false);
-        
+        _uiCon.activeFacesHolder.SetActive(false);
+        _uiCon.chargeHolder.SetActive(false);
+
         _cameraCont.firstPersonCam.enabled = false;
         _cameraCont.thirdPersonCam.enabled = false;
 
@@ -114,18 +121,24 @@ public class ActivePlayerController : MonoBehaviour
     {
         _uiCon.betweenTurnHolder.SetActive(false);
         _uiCon.timerHolder.SetActive(true);
+        _uiCon.activeFacesHolder.SetActive(true);
+        _uiCon.chargeHolder.SetActive(true);
 
         _cameraCont.skyCamera.enabled = false;
         _cameraCont.thirdPersonCam.enabled = true;
         
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        _allWeaponManagers[_activePlayerIndex].charges = 3;
         
         currentTurnTimer = turnTimer;
         NextPlayerActive();
+        _uiCon.SetChargeImgs(_allWeaponManagers[_activePlayerIndex].charges);
+        _uiCon.SetActiveFaces(_activePlayerIndex);
         _hasChosen = false;
     }
-    
+
     private void NonActiveHandling()
     {
         if (activePlayer != null)
@@ -169,7 +182,7 @@ public class ActivePlayerController : MonoBehaviour
     {
         _kinTimer = secondsBeforeKinematic;
     }
-    
+
     public void NextPlayerActive()
     {
         bool hasSelected = false;

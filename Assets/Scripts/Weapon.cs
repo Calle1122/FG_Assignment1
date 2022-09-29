@@ -12,6 +12,8 @@ public class Weapon : ScriptableObject
     public bool doubleShot;
     
     public bool shouldCharge;
+
+    public int chargesToUse;
     
     public float baseForce;
     public float damage;

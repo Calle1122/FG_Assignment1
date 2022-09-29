@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -61,6 +62,14 @@ public class PlayerManager : MonoBehaviour
                 .activePlayer)
         {
             GameObject.Find("ActivePlayerController").GetComponent<ActivePlayerController>().NewTurn();
+        }
+
+        GameSettings.GameSettingsInstance.deadPlayers++;
+
+        if (GameSettings.GameSettingsInstance.deadPlayers >= GameSettings.GameSettingsInstance.numberOfPlayers - 1)
+        {
+            //Load GameOver Scene
+            SceneManager.LoadScene(2);
         }
         
         Destroy(this.gameObject);

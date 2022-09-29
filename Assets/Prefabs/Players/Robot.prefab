@@ -499,6 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeWeapon: {fileID: 0}
   canShoot: 0
+  charges: 3
   maxChargeTime: 1
   weaponHolder: {fileID: 8853860278280333846}
   dualPos1: {fileID: 3088647541988583440}

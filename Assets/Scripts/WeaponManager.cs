@@ -11,6 +11,8 @@ public class WeaponManager : MonoBehaviour
     private BattleUIController _battleUICon;
 
     public bool canShoot = false;
+
+    public int charges = 3;
     
     public float maxChargeTime = 1f;
     private float _shootMultiTimer = 0f;
@@ -38,55 +40,63 @@ public class WeaponManager : MonoBehaviour
             {
                 if (activeWeapon != null)
                 {
-                    if (_isCharging)
+                    if (activeWeapon.chargesToUse <= charges)
                     {
-                        ChargeTime();
-                    }
-
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        if (activeWeapon.shouldCharge)
+                        if (_isCharging)
                         {
-                            _shootMultiTimer = 0;
-                
-                            _battleUICon.shootSliderHolder.SetActive(true);
-                            _isCharging = true;
+                            ChargeTime();
                         }
 
-                        else
+                        if (Input.GetMouseButtonDown(0))
                         {
-                            Vector3 spawnPoint = this.transform.GetChild(0).transform.position + (transform.forward * 1.5f);
-                            activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, activeWeapon.baseForce, transform.rotation);
-                        }
-                        
-                    }
-
-                    if (Input.GetMouseButtonUp(0))
-                    {
-                        if (activeWeapon.shouldCharge)
-                        {
-                            _battleUICon.shootSliderHolder.SetActive(false);
-                            _isCharging = false;
-
-                            if (activeWeapon.doubleShot)
+                            if (activeWeapon.shouldCharge)
                             {
-                                Vector3 spawnPoint = dualPos1.transform.position + (transform.forward * 1.5f);
-                                activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * activeWeapon.baseForce, transform.rotation);
-                                spawnPoint = dualPos2.transform.position + (transform.forward * 1.5f);
-                                activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * activeWeapon.baseForce, transform.rotation);
+                                _shootMultiTimer = 0;
+                    
+                                _battleUICon.shootSliderHolder.SetActive(true);
+                                _isCharging = true;
                             }
-
 
                             else
                             {
                                 Vector3 spawnPoint = this.transform.GetChild(0).transform.position + (transform.forward * 1.5f);
-                                activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * activeWeapon.baseForce, transform.rotation);
+                                charges -= activeWeapon.chargesToUse;
+                                activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, activeWeapon.baseForce, transform.rotation);
+                                _battleUICon.SetChargeImgs(charges);
                             }
                             
                         }
 
+                        if (Input.GetMouseButtonUp(0))
+                        {
+                            if (activeWeapon.shouldCharge)
+                            {
+                                _battleUICon.shootSliderHolder.SetActive(false);
+                                _isCharging = false;
+
+                                if (activeWeapon.doubleShot)
+                                {
+                                    Vector3 spawnPoint = dualPos1.transform.position + (transform.forward * 1.5f);
+                                    charges -= activeWeapon.chargesToUse;
+                                    activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * activeWeapon.baseForce, transform.rotation);
+                                    spawnPoint = dualPos2.transform.position + (transform.forward * 1.5f);
+                                    activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * activeWeapon.baseForce, transform.rotation);
+                                    _battleUICon.SetChargeImgs(charges);
+                                }
+
+
+                                else
+                                {
+                                    Vector3 spawnPoint = this.transform.GetChild(0).transform.position + (transform.forward * 1.5f);
+                                    charges -= activeWeapon.chargesToUse;
+                                    activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * activeWeapon.baseForce, transform.rotation);
+                                    _battleUICon.SetChargeImgs(charges);
+                                }
+                                
+                            }
+
+                        }
                     }
-                    
                 }
                 
             }
