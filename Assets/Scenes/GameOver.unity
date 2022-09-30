@@ -2184,6 +2184,14 @@ MonoBehaviour:
   - {fileID: 1995774118}
   - {fileID: 1118250104}
   - {fileID: 769265195}
+  name3: {fileID: 1995774118}
+  name4: {fileID: 696666508}
+  p3Robot: {fileID: 1107291445}
+  p4Robot: {fileID: 276139739}
+  nr3: {fileID: 1926223309}
+  nr4: {fileID: 415677106}
+  nonActiveRbt: {fileID: 21300000, guid: 1c615ef89bc439c46a861d57c1d1e817, type: 3}
+  activeRbt: {fileID: 21300000, guid: b01b93f7056705e4cafcc1f3924e8704, type: 3}
 --- !u!4 &1782305871
 Transform:
   m_ObjectHideFlags: 0

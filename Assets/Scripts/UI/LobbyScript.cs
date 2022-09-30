@@ -72,9 +72,8 @@ public class LobbyScript : MonoBehaviour
 
     IEnumerator SwapScene()
     {
-        yield return new WaitForSeconds(2);
-        GameSettings.GameSettingsInstance.ClearQueues();
-        
+        yield return new WaitForSeconds(1);
+
         SceneManager.LoadScene(1);
 
         yield return null;

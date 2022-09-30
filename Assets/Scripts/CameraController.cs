@@ -1,7 +1,8 @@
-using System;
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using Unity.VisualScripting;
 
 public class CameraController : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class CameraController : MonoBehaviour
     private BattleUIController _battleUICon;
     
     public Camera activeCamera;
-    
+
     private CameraHolderScript _camHolderMan;
 
     public Camera thirdPersonCam, firstPersonCam, skyCamera;
@@ -33,6 +34,8 @@ public class CameraController : MonoBehaviour
     
     void Start()
     {
+        DOTween.Init();
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -43,6 +46,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+
         ChangeCamera();
         
         skyCamRotator.transform.Rotate(Vector3.up, 15f * Time.deltaTime);

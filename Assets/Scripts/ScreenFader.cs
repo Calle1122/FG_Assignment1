@@ -1,5 +1,4 @@
 
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,11 +28,11 @@ public class ScreenFader : MonoBehaviour
 
     IEnumerator FadeOut()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.75f);
 
         shouldFade = true;
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.25f);
 
         blackFade.SetActive(false);
         shouldFade = false;

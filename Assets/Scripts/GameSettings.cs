@@ -11,6 +11,8 @@ public class GameSettings : MonoBehaviour
     public int numberOfPlayers;
     public bool shouldLogName = true;
 
+    public bool isPaused = false;
+    
     public int deadPlayers;
     
     public int playerToDisplay;
@@ -18,14 +20,16 @@ public class GameSettings : MonoBehaviour
     public string[] playerNames;
     public Sprite[] playerFaces;
 
-    public Queue<string> deadNameQueue;
-    public Queue<Sprite> deadFaceQueue;
+    public Queue<string> DeadNameQueue;
+    public Queue<Sprite> DeadFaceQueue;
 
     [SerializeField] private Sprite defaultFace;
-
-    //private bool _hasInitialSetup = false;
+    
     private void Awake()
     {
+        DeadNameQueue = new Queue<string>();
+        DeadFaceQueue = new Queue<Sprite>();
+        
         playerToDisplay = -1;
         
         if (GameSettingsInstance == null)
@@ -43,68 +47,34 @@ public class GameSettings : MonoBehaviour
     {
         for (int i = 0; i < numberOfPlayers; i++)
         {
-            if (!deadNameQueue.Contains(playerNames[i]))
+            if (DeadNameQueue.Contains(playerNames[i]) == false)
             {
-                deadNameQueue.Enqueue(playerNames[i]);
-                deadFaceQueue.Enqueue(playerFaces[i]);
+                DeadNameQueue.Enqueue(playerNames[i]);
+                DeadFaceQueue.Enqueue(playerFaces[i]);
             }
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
     
     public void SetupArrays()
     {
-        /*if (_hasInitialSetup)
-        {
-            Sprite[] prevFaces = new Sprite[numberOfPlayers];
-            string[] prevNames = new string[numberOfPlayers];
-
-            for (int i = 0; i < numberOfPlayers - 1; i++)
-            {
-                if (i < playerFaces.Length)
-                {
-                    prevFaces[i] = playerFaces[i];
-                }
-
-                if (i < playerNames.Length)
-                {
-                    prevNames[i] = playerNames[i];
-                }
-            }*/
-            
-            playerFaces = new Sprite[numberOfPlayers];
+        playerFaces = new Sprite[numberOfPlayers];
             playerNames = new string[numberOfPlayers];
 
             for (int i = 0; i < playerFaces.Length; i++)
             {
                 playerFaces[i] = defaultFace;
             }
-            
-            /*for (int i = 0; i < numberOfPlayers - 1; i++)
-            {
-                if (prevFaces[i] != null)
-                {
-                    playerFaces[i] = prevFaces[i];
-                }
-
-                if (prevNames[i] != null)
-                {
-                    playerNames[i] = prevNames[i];
-                }
-            }
-        }
-        else
-        {
-            playerFaces = new Sprite[numberOfPlayers];
-            playerNames = new string[numberOfPlayers];
-
-            _hasInitialSetup = true;
-        }*/
     }
 
     public void ClearQueues()
     {
-        deadFaceQueue.Clear();
-        deadNameQueue.Clear();
+        DeadFaceQueue.Clear();
+        DeadNameQueue.Clear();
     }
     
     public void LogFace(int playerNumber, Sprite face)

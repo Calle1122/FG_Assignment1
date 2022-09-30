@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 
 public class ActivePlayerController : MonoBehaviour
@@ -71,13 +72,30 @@ public class ActivePlayerController : MonoBehaviour
         
         NonActiveHandling();
 
-        currentTurnTimer -= Time.deltaTime;
-        if (currentTurnTimer <= 0)
+        if (GameSettings.GameSettingsInstance.isPaused == false)
         {
-            NewTurn();
+            currentTurnTimer -= Time.deltaTime;
+            if (currentTurnTimer <= 0)
+            {
+                NewTurn();
+            }
         }
+
     }
 
+    public void CanMove(bool movable)
+    {
+        if (movable)
+        {
+            _allCharacterControllers[_activePlayerIndex].canMove = true;
+        }
+
+        else
+        {
+            _allCharacterControllers[_activePlayerIndex].canMove = false;
+        }
+    }
+    
     public void NewTurn()
     {
         BetweenTurn();
@@ -100,20 +118,20 @@ public class ActivePlayerController : MonoBehaviour
         }
         
         _uiCon.UpdateBetweenTurnsInfo();
-
-        _uiCon.betweenTurnHolder.SetActive(true);
+        
         _uiCon.timerHolder.SetActive(false);
         _uiCon.activeFacesHolder.SetActive(false);
         _uiCon.chargeHolder.SetActive(false);
 
         _cameraCont.firstPersonCam.enabled = false;
         _cameraCont.thirdPersonCam.enabled = false;
-
         _cameraCont.skyCamera.enabled = true;
-
+        
+        _uiCon.betweenTurnHolder.SetActive(true);
+        
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
+            
         _allCharacterControllers[_activePlayerIndex].canMove = false;
     }
 
