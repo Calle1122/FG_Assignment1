@@ -1889,6 +1889,8 @@ MonoBehaviour:
   shouldLogName: 1
   isPaused: 0
   deadPlayers: 0
+  unhealthyMode: 0
+  moonMode: 0
   playerToDisplay: 0
   playerNames: []
   playerFaces: []
@@ -4898,6 +4900,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 820397553}
+  - component: {fileID: 820397554}
   m_Layer: 5
   m_Name: Cheats
   m_TagString: Untagged
@@ -4928,6 +4931,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &820397554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820397552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab323643096f8e841ac922bc726eb299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moonToggle: {fileID: 1216707530}
+  healthToggle: {fileID: 1938334426}
 --- !u!1 &829870715
 GameObject:
   m_ObjectHideFlags: 0
@@ -7578,7 +7595,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 820397554}
+        m_TargetAssemblyTypeName: CheatsScript, Assembly-CSharp
+        m_MethodName: SetMoon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1217614294
 GameObject:
@@ -10529,7 +10558,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 820397554}
+        m_TargetAssemblyTypeName: CheatsScript, Assembly-CSharp
+        m_MethodName: SetHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1957969068
 GameObject:

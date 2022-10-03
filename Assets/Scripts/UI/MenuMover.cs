@@ -30,6 +30,9 @@ public class MenuMover : MonoBehaviour
     private void Start()
     {
         DOTween.Init();
+
+        GameSettings.GameSettingsInstance.moonMode = false;
+        GameSettings.GameSettingsInstance.unhealthyMode = false;
     }
 
     public void MainToPlay()

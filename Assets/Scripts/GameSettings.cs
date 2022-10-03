@@ -91,4 +91,14 @@ public class GameSettings : MonoBehaviour
             playerNames[playerNumber - 1] = playerName;
         }
     }
+
+    public void SetMoonMode(bool isOn)
+    {
+        moonMode = isOn;
+    }
+
+    public void SetHealthMode(bool isOn)
+    {
+        unhealthyMode = isOn;
+    }
 }

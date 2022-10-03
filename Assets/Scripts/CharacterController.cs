@@ -11,7 +11,7 @@ public class CharacterController : MonoBehaviour
     private BattleUIController _battleUICon;
     
     public float speed = 2.5f;
-    public float jumpForce = 10f;
+    public float jumpForce = 4f;
     public float maxChargeTime = 1f;
 
     private float _jumpMultiTimer = 0f;
@@ -31,6 +31,8 @@ public class CharacterController : MonoBehaviour
     private float _inputX;
     private float _inputZ;
 
+    private float _actualJumpForce;
+
     private Vector3 _forward;
     private Vector3 _right;
 
@@ -48,7 +50,20 @@ public class CharacterController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         _battleUICon = GameObject.Find("BattleUIController").GetComponent<BattleUIController>();
     }
-    
+
+    private void Start()
+    {
+        if (GameSettings.GameSettingsInstance.moonMode)
+        {
+            _actualJumpForce = jumpForce * 2.5f;
+        }
+
+        else
+        {
+            _actualJumpForce = jumpForce;
+        }
+    }
+
     void Update()
     {
 
@@ -82,7 +97,7 @@ public class CharacterController : MonoBehaviour
             {
                 _battleUICon.jumpSliderHolder.SetActive(false);
                 _isCharging = false;
-                playerRb.AddForce(Vector3.up * jumpForce * (_jumpMultiTimer + 1), ForceMode.Impulse);
+                playerRb.AddForce(Vector3.up * _actualJumpForce * (_jumpMultiTimer + 1), ForceMode.Impulse);
             }
         }
 

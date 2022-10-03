@@ -118,7 +118,7 @@ public class CameraController : MonoBehaviour
         _rotationY += xMouse;
 
         //Make sure player can't look up or down more than 90 degrees.
-        _rotationX = Mathf.Clamp(_rotationX, -90f, 90f);
+        _rotationX = Mathf.Clamp(_rotationX, -35f, 45f);
         
         //Rotate camera and player
         thirdPersonRotator.transform.rotation = Quaternion.Euler(_rotationX, _rotationY, 0);

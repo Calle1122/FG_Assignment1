@@ -26,6 +26,22 @@ public class PlayerManager : MonoBehaviour
     {
         cameraPosTransform = transform.GetChild(0);
         _healthBar = this.gameObject.GetComponent<HealthbarManager>();
+
+        if (GameSettings.GameSettingsInstance.unhealthyMode)
+        {
+            maxHealth = 100;
+        }
+
+        else
+        {
+            maxHealth = 250;
+        }
+    }
+
+    private void Start()
+    {
+        _health = maxHealth;
+        _healthBar.UpdateHealth((int)_health);
     }
 
     public void TakeDamage(float dmg)
