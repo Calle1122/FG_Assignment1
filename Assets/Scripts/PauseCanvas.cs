@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class PauseCanvas : MonoBehaviour
 {
@@ -32,27 +33,13 @@ public class PauseCanvas : MonoBehaviour
                 case true:
                     
                     MenuOut();
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
 
-                    _isActive = false;
-                    GameSettings.GameSettingsInstance.isPaused = false;
-                    
-                    activeCon.CanMove(true);
-                    
                     break;
                 
                 case false:
 
                     MenuIn();
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
 
-                    _isActive = true;
-                    GameSettings.GameSettingsInstance.isPaused = true;
-                    
-                    activeCon.CanMove(false);
-                    
                     break;
             }
         }
@@ -61,11 +48,38 @@ public class PauseCanvas : MonoBehaviour
     public void MenuIn()
     {
         pauseArea.transform.DOMove(_middlePos, 1f);
+        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        _isActive = true;
+        GameSettings.GameSettingsInstance.isPaused = true;
+                    
+        activeCon.CanMove(false);
     }
 
     public void MenuOut()
     {
         pauseArea.transform.DOMove(leftPos.transform.position, 1f);
+        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        _isActive = false;
+        GameSettings.GameSettingsInstance.isPaused = false;
+                    
+        activeCon.CanMove(true);
+    }
+    
+    public void BackToMain()
+    {
+        GameSettings.GameSettingsInstance.playerToDisplay = -1;
+        GameSettings.GameSettingsInstance.ClearQueues();
+        
+        MenuOut();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene(0);
     }
 }
 

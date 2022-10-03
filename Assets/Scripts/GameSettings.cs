@@ -1,5 +1,4 @@
 
-
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +13,10 @@ public class GameSettings : MonoBehaviour
     public bool isPaused = false;
     
     public int deadPlayers;
-    
+
+    public bool unhealthyMode = false;
+    public bool moonMode = false;
+
     public int playerToDisplay;
     
     public string[] playerNames;
