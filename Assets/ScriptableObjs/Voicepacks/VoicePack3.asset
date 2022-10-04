@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01540c8c2be1c874d839c566ea8744ae, type: 3}
+  m_Name: VoicePack3
+  m_EditorClassIdentifier: 
+  roundStartSounds:
+  - {fileID: 8300000, guid: b52034630c32c394bbdd6830bd5d789a, type: 3}
+  - {fileID: 8300000, guid: 7e7ecfe9e2d51ea44905a1b141a500c5, type: 3}
+  takeDamageSounds:
+  - {fileID: 8300000, guid: 162afb30af344b44ba81df3c636cfadf, type: 3}
+  - {fileID: 8300000, guid: 29a0befb8500dc24eb27af586e19ab50, type: 3}
+  deathSound: {fileID: 8300000, guid: 69752c387ad480e46aab70c21a6c738c, type: 3}
+  healthUpSound: {fileID: 8300000, guid: 2e64ad0e533681e46949715966b3754f, type: 3}
+  timeUpSound: {fileID: 8300000, guid: f99abc389180c174580f3ff78a7825be, type: 3}
+  hello: {fileID: 8300000, guid: 1cf40854a7148c44ba71214d5ec73988, type: 3}

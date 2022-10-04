@@ -485,7 +485,7 @@ MonoBehaviour:
   isActive: 0
   cameraPosTransform: {fileID: 0}
   maxHealth: 250
-  voicePack: {fileID: 11400000, guid: a1f998ca9390ce840a6567d892b30d04, type: 2}
+  voicePack: {fileID: 11400000, guid: b58225b33d8b73448894adff2b72c6c2, type: 2}
   deadRobot: {fileID: 1744474399132212231, guid: 76dd30c981f05dc4380f9e6b51e8753b, type: 3}
 --- !u!114 &8853860277178101829
 MonoBehaviour:
