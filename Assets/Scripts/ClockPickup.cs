@@ -18,6 +18,8 @@ public class ClockPickup : MonoBehaviour
         {
             _activePlayerCon.currentTurnTimer += time;
             
+            SoundManager.SoundManagerInstance.PlaySound(_activePlayerCon.allPlayerManagers[_activePlayerCon.activePlayerIndex].voicePack.timeUpSound);
+            
             Destroy(this.gameObject);
         }
     }

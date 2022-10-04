@@ -20,6 +20,8 @@ public class PlayerManager : MonoBehaviour
     public float maxHealth = 100;
     private float _health = 100;
 
+    public VoicePack voicePack;
+
     [SerializeField] private GameObject deadRobot;
 
     private void Awake()
@@ -54,6 +56,11 @@ public class PlayerManager : MonoBehaviour
         {
             Die();
         }
+
+        else
+        {
+            SoundManager.SoundManagerInstance.PlaySound(voicePack.TakeDamageSound());
+        }
     }
 
     public void Heal(float hp)
@@ -64,6 +71,8 @@ public class PlayerManager : MonoBehaviour
         {
             _health = maxHealth;
         }
+        
+        SoundManager.SoundManagerInstance.PlaySound(voicePack.healthUpSound);
         
         _healthBar.UpdateHealth((int)_health);
     }
@@ -92,6 +101,8 @@ public class PlayerManager : MonoBehaviour
             //Load GameOver Scene
             SceneManager.LoadScene(2);
         }
+        
+        SoundManager.SoundManagerInstance.PlaySound(voicePack.deathSound);
         
         Destroy(gameObject);
     }

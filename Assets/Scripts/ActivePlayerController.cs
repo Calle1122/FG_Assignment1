@@ -26,7 +26,7 @@ public class ActivePlayerController : MonoBehaviour
     private BattleManager _battleMan;
     private CameraController _cameraCont;
     private BattleUIController _uiCon;
-    private int _activePlayerIndex = 0;
+    public int activePlayerIndex = 0;
 
     private bool _hasChosen;
 
@@ -55,7 +55,7 @@ public class ActivePlayerController : MonoBehaviour
             _allWeaponManagers[i] = _battleMan.allPlayers[i].GetComponent<WeaponManager>();
         }
 
-        _activePlayerIndex = GameSettings.GameSettingsInstance.numberOfPlayers - 1;
+        activePlayerIndex = GameSettings.GameSettingsInstance.numberOfPlayers - 1;
         activePlayer = allPlayerManagers[GameSettings.GameSettingsInstance.numberOfPlayers - 1].gameObject;
         _allCharacterControllers[GameSettings.GameSettingsInstance.numberOfPlayers - 1].canMove = true;
         _allCharacterControllers[GameSettings.GameSettingsInstance.numberOfPlayers - 1].playerRb.isKinematic = false;
@@ -90,12 +90,12 @@ public class ActivePlayerController : MonoBehaviour
     {
         if (movable)
         {
-            _allCharacterControllers[_activePlayerIndex].canMove = true;
+            _allCharacterControllers[activePlayerIndex].canMove = true;
         }
 
         else
         {
-            _allCharacterControllers[_activePlayerIndex].canMove = false;
+            _allCharacterControllers[activePlayerIndex].canMove = false;
         }
     }
     
@@ -137,7 +137,7 @@ public class ActivePlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
             
-        _allCharacterControllers[_activePlayerIndex].canMove = false;
+        _allCharacterControllers[activePlayerIndex].canMove = false;
     }
 
     public void StartTurn()
@@ -155,13 +155,15 @@ public class ActivePlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        _allWeaponManagers[_activePlayerIndex].charges = 3;
+        _allWeaponManagers[activePlayerIndex].charges = 3;
         
         currentTurnTimer = turnTimer;
         NextPlayerActive();
-        _uiCon.SetChargeImgs(_allWeaponManagers[_activePlayerIndex].charges);
-        _uiCon.SetActiveFaces(_activePlayerIndex);
+        _uiCon.SetChargeImgs(_allWeaponManagers[activePlayerIndex].charges);
+        _uiCon.SetActiveFaces(activePlayerIndex);
         _hasChosen = false;
+        
+        SoundManager.SoundManagerInstance.PlaySound(allPlayerManagers[activePlayerIndex].voicePack.RoundStartSound());
     }
 
     private void NonActiveHandling()
@@ -212,43 +214,43 @@ public class ActivePlayerController : MonoBehaviour
     {
         bool hasSelected = false;
         
-        _allCharacterControllers[_activePlayerIndex].canMove = false;
+        _allCharacterControllers[activePlayerIndex].canMove = false;
         //_allCharacterControllers[_activePlayerIndex].playerRb.isKinematic = true;
-        _allWeaponManagers[_activePlayerIndex].canShoot = false;
-        _allWeaponManagers[_activePlayerIndex].NoWeaponActive();
+        _allWeaponManagers[activePlayerIndex].canShoot = false;
+        _allWeaponManagers[activePlayerIndex].NoWeaponActive();
 
         while (hasSelected == false)
         {
-            _activePlayerIndex++;
+            activePlayerIndex++;
 
-            if (_activePlayerIndex == _battleMan.allPlayers.Length)
+            if (activePlayerIndex == _battleMan.allPlayers.Length)
             {
-                _activePlayerIndex = 0;
+                activePlayerIndex = 0;
             }
 
-            if (allPlayerManagers[_activePlayerIndex] != null)
+            if (allPlayerManagers[activePlayerIndex] != null)
             {
                 hasSelected = true;
             }
         }
 
-        activePlayer = allPlayerManagers[_activePlayerIndex].gameObject;
+        activePlayer = allPlayerManagers[activePlayerIndex].gameObject;
         
         _cameraCont.UpdateCameraTarget(activePlayer);
         
-        _allCharacterControllers[_activePlayerIndex].canMove = true;
-        _allCharacterControllers[_activePlayerIndex].playerRb.isKinematic = false;
-        _allWeaponManagers[_activePlayerIndex].canShoot = true;
+        _allCharacterControllers[activePlayerIndex].canMove = true;
+        _allCharacterControllers[activePlayerIndex].playerRb.isKinematic = false;
+        _allWeaponManagers[activePlayerIndex].canShoot = true;
     }
 
     public void EquipWeapon(Weapon toEquip)
     {
-        _allWeaponManagers[_activePlayerIndex].EquipWeapon(toEquip);
+        _allWeaponManagers[activePlayerIndex].EquipWeapon(toEquip);
     }
 
     public void NoWeapon()
     {
-        _allWeaponManagers[_activePlayerIndex].NoWeaponActive();
+        _allWeaponManagers[activePlayerIndex].NoWeaponActive();
     }
 
 }

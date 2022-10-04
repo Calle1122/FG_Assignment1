@@ -633,7 +633,6 @@ GameObject:
   m_Component:
   - component: {fileID: 98901712}
   - component: {fileID: 98901711}
-  - component: {fileID: 98901713}
   m_Layer: 9
   m_Name: PostProcessing
   m_TagString: Untagged
@@ -673,19 +672,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &98901713
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 98901710}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5000
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &112360535 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7267736004413404266, guid: c10a406ddeab27b4a9e39600b8b57107, type: 3}
@@ -4448,6 +4434,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f5702dd4b1e6041918bfea358ff7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enterSound: {fileID: 8300000, guid: f8d4d731ed939534fb94db6bbf65ea8a, type: 3}
+  exitSound: {fileID: 8300000, guid: 207b0b953d068704a9b34f46faf6160c, type: 3}
 --- !u!114 &666836856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5621,7 +5609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 98901712}
+  volumeTrigger: {fileID: 856089313}
   volumeLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -6062,6 +6050,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: GameCamera
   m_TagString: MainCamera
@@ -6135,6 +6124,66 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 963194228}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!4 &965789506 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7267736004413404266, guid: 2440706f8200b374cbe5a7466b6c7fdc, type: 3}
@@ -8641,7 +8690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 98901712}
+  volumeTrigger: {fileID: 1232096977}
   volumeLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -8832,6 +8881,7 @@ MonoBehaviour:
   activePlayer: {fileID: 0}
   turnTimer: 31
   currentTurnTimer: 0
+  activePlayerIndex: 0
 --- !u!4 &1275235618
 Transform:
   m_ObjectHideFlags: 0
@@ -11098,7 +11148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 98901712}
+  volumeTrigger: {fileID: 1559090970}
   volumeLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -11885,6 +11935,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f5702dd4b1e6041918bfea358ff7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enterSound: {fileID: 8300000, guid: f8d4d731ed939534fb94db6bbf65ea8a, type: 3}
+  exitSound: {fileID: 8300000, guid: 207b0b953d068704a9b34f46faf6160c, type: 3}
 --- !u!114 &1639499625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15315,6 +15367,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 291891138815920204, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+      propertyPath: exitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 207b0b953d068704a9b34f46faf6160c, type: 3}
+    - target: {fileID: 291891138815920204, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+      propertyPath: enterSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f8d4d731ed939534fb94db6bbf65ea8a, type: 3}
     - target: {fileID: 884340520182274817, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -15479,6 +15539,30 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7372442926414259381, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+      propertyPath: exitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 207b0b953d068704a9b34f46faf6160c, type: 3}
+    - target: {fileID: 7372442926414259381, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+      propertyPath: enterSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f8d4d731ed939534fb94db6bbf65ea8a, type: 3}
+    - target: {fileID: 8529395401851891202, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+      propertyPath: exitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 207b0b953d068704a9b34f46faf6160c, type: 3}
+    - target: {fileID: 8529395401851891202, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+      propertyPath: enterSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f8d4d731ed939534fb94db6bbf65ea8a, type: 3}
+    - target: {fileID: 8565431857711473475, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+      propertyPath: exitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 207b0b953d068704a9b34f46faf6160c, type: 3}
+    - target: {fileID: 8565431857711473475, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+      propertyPath: enterSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f8d4d731ed939534fb94db6bbf65ea8a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
 --- !u!1 &884340520499564023 stripped
@@ -15553,6 +15637,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f5702dd4b1e6041918bfea358ff7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enterSound: {fileID: 8300000, guid: f8d4d731ed939534fb94db6bbf65ea8a, type: 3}
+  exitSound: {fileID: 8300000, guid: 207b0b953d068704a9b34f46faf6160c, type: 3}
 --- !u!1001 &7185739629370051655
 PrefabInstance:
   m_ObjectHideFlags: 0

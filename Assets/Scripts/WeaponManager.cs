@@ -57,6 +57,8 @@ public class WeaponManager : MonoBehaviour
 
                             else
                             {
+                                SoundManager.SoundManagerInstance.PlaySound(activeWeapon.fireSound);
+                                
                                 Vector3 spawnPoint = this.transform.GetChild(0).transform.position + (transform.forward * 1.5f);
                                 charges -= activeWeapon.chargesToUse;
                                 activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, activeWeapon.baseForce, transform.rotation);
@@ -90,6 +92,8 @@ public class WeaponManager : MonoBehaviour
                                     activeWeapon.Shoot(spawnPoint, _cameraCon.activeCamera.transform.forward, _shootMultiTimer * activeWeapon.baseForce, transform.rotation);
                                     _battleUICon.SetChargeImgs(charges);
                                 }
+                                
+                                SoundManager.SoundManagerInstance.PlaySound(activeWeapon.fireSound);
                                 
                             }
 

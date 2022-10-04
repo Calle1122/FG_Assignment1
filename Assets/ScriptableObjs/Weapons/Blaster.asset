@@ -19,3 +19,5 @@ MonoBehaviour:
   chargesToUse: 1
   baseForce: 7.5
   damage: 15
+  fireSound: {fileID: 8300000, guid: 92767df28ec21b54b995a2221550a836, type: 3}
+  hitSound: {fileID: 8300000, guid: f49cf40c7e66ec244a7e80dbbd167a33, type: 3}

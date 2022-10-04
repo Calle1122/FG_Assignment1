@@ -17,6 +17,8 @@ public class Weapon : ScriptableObject
     public float baseForce;
     public float damage;
 
+    public AudioClip fireSound;
+
     public void Shoot(Vector3 projectileSpawnTransform, Vector3 shootDir, float shootForce, Quaternion projectileRot)
     {
         GameObject newProjectile = Instantiate(projectile, projectileSpawnTransform, projectileRot);

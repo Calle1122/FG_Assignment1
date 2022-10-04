@@ -24,6 +24,8 @@ public class ProjectileManager : MonoBehaviour
 
     private bool _hasDealtDamage = false;
     
+    [SerializeField] private AudioClip hitSound;
+    
     void Awake()
     {
         _planeGenerator = GameObject.Find("MeshHolder");
@@ -82,6 +84,7 @@ public class ProjectileManager : MonoBehaviour
                 _planeMeshCon.DeformMesh(transform.position);
             }
         
+            SoundManager.SoundManagerInstance.PlaySound(hitSound);
             Destroy(this.gameObject);
         }
         

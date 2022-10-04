@@ -82,6 +82,7 @@ MonoBehaviour:
   splashDamage: 1
   splashRadius: 2
   blastSphere: {fileID: 5028525839095389190, guid: 0f27e8432dec48e469019c0600eefbe1, type: 3}
+  hitSound: {fileID: 8300000, guid: 8a53db3f6c3487a4a84874c66dd1266c, type: 3}
 --- !u!33 &42143349284181425
 MeshFilter:
   m_ObjectHideFlags: 0
