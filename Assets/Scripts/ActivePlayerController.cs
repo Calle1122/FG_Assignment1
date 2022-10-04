@@ -101,6 +101,8 @@ public class ActivePlayerController : MonoBehaviour
     
     public void NewTurn()
     {
+        Actions.OnTurnEnd();
+        
         BetweenTurn();
     }
 
