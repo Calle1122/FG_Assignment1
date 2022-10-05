@@ -195,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   exitPortal: {fileID: 0}
+  portalSound: {fileID: 8300000, guid: 0d349b8566db658418d2a52f0afa0ce4, type: 3}
   screenTxt: {fileID: 2508630150936454234}
 --- !u!1 &6280120526132484490
 GameObject:

@@ -41,6 +41,10 @@ public class CharacterController : MonoBehaviour
     private float _wobbleAmount = 3.5f;
     private float _wobbleTimer = .4f;
     private int _wobbleSwitch = 0;
+
+    private bool _shouldPlayMove = true;
+
+    [SerializeField] private AudioClip jumpSound, moveSound;
     
     
     void Awake()
@@ -98,6 +102,8 @@ public class CharacterController : MonoBehaviour
                 _battleUICon.jumpSliderHolder.SetActive(false);
                 _isCharging = false;
                 playerRb.AddForce(Vector3.up * _actualJumpForce * (_jumpMultiTimer + 1), ForceMode.Impulse);
+                
+                SoundManager.SoundManagerInstance.PlaySound(jumpSound);
             }
         }
 
@@ -109,11 +115,28 @@ public class CharacterController : MonoBehaviour
         {
             GetInput();
             Move();
+
+            if (playerRb.velocity.magnitude > .25f)
+            {
+                StartCoroutine(PlayMoveSound());
+            }
         }
 
         if (!canMove)
         {
             transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
+        }
+    }
+
+    IEnumerator PlayMoveSound()
+    {
+        if (_shouldPlayMove)
+        {
+            _shouldPlayMove = false;
+            SoundManager.SoundManagerInstance.PlaySound(moveSound);
+            yield return new WaitForSeconds(1);
+            _shouldPlayMove = true;
+            yield return new WaitForEndOfFrame();
         }
     }
 

@@ -127,6 +127,7 @@ public class ActivePlayerController : MonoBehaviour
         _uiCon.timerHolder.SetActive(false);
         _uiCon.activeFacesHolder.SetActive(false);
         _uiCon.chargeHolder.SetActive(false);
+        _uiCon.sideButtonHolder.SetActive(false);
 
         _cameraCont.firstPersonCam.enabled = false;
         _cameraCont.thirdPersonCam.enabled = false;
@@ -148,6 +149,7 @@ public class ActivePlayerController : MonoBehaviour
         _uiCon.timerHolder.SetActive(true);
         _uiCon.activeFacesHolder.SetActive(true);
         _uiCon.chargeHolder.SetActive(true);
+        _uiCon.sideButtonHolder.SetActive(true);
 
         _cameraCont.skyCamera.enabled = false;
         _cameraCont.thirdPersonCam.enabled = true;

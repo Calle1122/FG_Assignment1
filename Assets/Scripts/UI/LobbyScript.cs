@@ -11,6 +11,7 @@ public class LobbyScript : MonoBehaviour
     [SerializeField] private GameObject activeP3, activeP4;
     [SerializeField] private GameObject inActiveP3, inActiveP4;
     [SerializeField] private GameObject nameP3, nameP4;
+    [SerializeField] private GameObject voiceP3, voiceP4;
 
     private bool shouldFade = false;
     
@@ -35,6 +36,9 @@ public class LobbyScript : MonoBehaviour
         
         nameP3.SetActive(false);
         nameP4.SetActive(false);
+        
+        voiceP3.SetActive(false);
+        voiceP4.SetActive(false);
     }
     
     public void ThreeActive()
@@ -47,6 +51,9 @@ public class LobbyScript : MonoBehaviour
         
         nameP3.SetActive(true);
         nameP4.SetActive(false);
+        
+        voiceP3.SetActive(true);
+        voiceP4.SetActive(false);
     }
 
     public void FourActive()
@@ -59,6 +66,9 @@ public class LobbyScript : MonoBehaviour
         
         nameP3.SetActive(true);
         nameP4.SetActive(true);
+        
+        voiceP3.SetActive(true);
+        voiceP4.SetActive(true);
     }
 
     public void StartGame()

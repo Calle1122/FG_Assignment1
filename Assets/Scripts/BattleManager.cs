@@ -25,6 +25,7 @@ public class BattleManager : MonoBehaviour
             allPlayers[i] = newPlayer;
             newPlayer.GetComponent<PlayerManager>().face.sprite = GameSettings.GameSettingsInstance.playerFaces[i];
             newPlayer.GetComponent<PlayerManager>().nameTxt.text = GameSettings.GameSettingsInstance.playerNames[i];
+            newPlayer.GetComponent<PlayerManager>().voicePack = GameSettings.GameSettingsInstance.playerVoices[i];
         }
         
     }

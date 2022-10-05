@@ -10,6 +10,7 @@ public class BattleUIController : MonoBehaviour
     public GameObject betweenTurnHolder;
     public GameObject activeFacesHolder;
     public GameObject chargeHolder;
+    public GameObject sideButtonHolder;
     
     [SerializeField] private TextMeshProUGUI turnTimerTxt;
     [SerializeField] private Button bazookaBtn, blasterBtn, noWeapBtn, dualBtn;
@@ -42,6 +43,7 @@ public class BattleUIController : MonoBehaviour
         crossHairObj.SetActive(false);
         activeFacesHolder.SetActive(false);
         chargeHolder.SetActive(false);
+        sideButtonHolder.SetActive(false);
 
         _activePlayerController = activePlayerManager.GetComponent<ActivePlayerController>();
         
@@ -62,6 +64,8 @@ public class BattleUIController : MonoBehaviour
             weaponsMenuHolder.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            
+            sideButtonHolder.SetActive(false);
         }
 
         if (Input.GetKeyUp(KeyCode.E))
@@ -69,6 +73,8 @@ public class BattleUIController : MonoBehaviour
             weaponsMenuHolder.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            
+            sideButtonHolder.SetActive(true);
             
             bazookaBtn.GetComponent<ButtonEffects>().UnExpandBtn();
             blasterBtn.GetComponent<ButtonEffects>().UnExpandBtn();

@@ -9,6 +9,7 @@ public class PortalScript : MonoBehaviour
     
     [SerializeField] private GameObject exitPortal;
     private PortalScript _exitPortalScript;
+    [SerializeField] private AudioClip portalSound;
     
     public TextMeshProUGUI screenTxt;
 
@@ -31,6 +32,8 @@ public class PortalScript : MonoBehaviour
             _exitPortalScript.cooldown = 2;
             SetPortalCooldownTexts();
             other.transform.position = exitPortal.transform.position;
+            
+            SoundManager.SoundManagerInstance.PlaySound(portalSound);
         }
     }
 

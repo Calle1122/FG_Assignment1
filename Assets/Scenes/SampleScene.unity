@@ -677,6 +677,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7267736004413404266, guid: c10a406ddeab27b4a9e39600b8b57107, type: 3}
   m_PrefabInstance: {fileID: 1589868793}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &119671401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7335658786196630761, guid: b3aaa6fc80178134091b37fe9006f171, type: 3}
+  m_PrefabInstance: {fileID: 884340520499564022}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &144604083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2729,6 +2734,7 @@ MonoBehaviour:
   betweenTurnHolder: {fileID: 884340520499564023}
   activeFacesHolder: {fileID: 2003306437}
   chargeHolder: {fileID: 2003306436}
+  sideButtonHolder: {fileID: 119671401}
   turnTimerTxt: {fileID: 1952060662}
   bazookaBtn: {fileID: 1229644206}
   blasterBtn: {fileID: 1229644205}

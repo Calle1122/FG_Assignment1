@@ -21,11 +21,13 @@ public class GameSettings : MonoBehaviour
     
     public string[] playerNames;
     public Sprite[] playerFaces;
+    public VoicePack[] playerVoices;
 
     public Queue<string> DeadNameQueue;
     public Queue<Sprite> DeadFaceQueue;
 
     [SerializeField] private Sprite defaultFace;
+    [SerializeField] private VoicePack defaultVoice;
     
     private void Awake()
     {
@@ -47,14 +49,12 @@ public class GameSettings : MonoBehaviour
 
     public void EnqueueLastPlayer()
     {
-        for (int i = 0; i < numberOfPlayers; i++)
-        {
-            if (DeadNameQueue.Contains(playerNames[i]) == false)
-            {
-                DeadNameQueue.Enqueue(playerNames[i]);
-                DeadFaceQueue.Enqueue(playerFaces[i]);
-            }
-        }
+        ActivePlayerController gameCon = GameObject.Find("ActivePlayerController").GetComponent<ActivePlayerController>();
+
+        gameCon.NextPlayerActive();
+        
+        DeadFaceQueue.Enqueue(gameCon.allPlayerManagers[gameCon.activePlayerIndex].face.sprite);
+        DeadNameQueue.Enqueue(gameCon.allPlayerManagers[gameCon.activePlayerIndex].nameTxt.text);
     }
 
     public void QuitGame()
@@ -65,12 +65,15 @@ public class GameSettings : MonoBehaviour
     public void SetupArrays()
     {
         playerFaces = new Sprite[numberOfPlayers];
-            playerNames = new string[numberOfPlayers];
-
-            for (int i = 0; i < playerFaces.Length; i++)
-            {
-                playerFaces[i] = defaultFace;
-            }
+        playerNames = new string[numberOfPlayers];
+        playerVoices = new VoicePack[numberOfPlayers];
+        
+        for (int i = 0; i < playerFaces.Length; i++)
+        {
+            playerFaces[i] = defaultFace;
+            playerVoices[i] = defaultVoice;
+            playerNames[i] = "Unnamed Robot";
+        }
     }
 
     public void ClearQueues()
@@ -90,6 +93,13 @@ public class GameSettings : MonoBehaviour
         {
             playerNames[playerNumber - 1] = playerName;
         }
+    }
+
+    public void LogVoice(int playerNumber, VoicePack voice)
+    {
+        playerVoices[playerNumber - 1] = voice;
+        
+        SoundManager.SoundManagerInstance.PlaySound(voice.hello);
     }
 
     public void SetMoonMode(bool isOn)

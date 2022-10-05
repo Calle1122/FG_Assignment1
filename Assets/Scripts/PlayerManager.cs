@@ -96,6 +96,7 @@ public class PlayerManager : MonoBehaviour
 
         if (GameSettings.GameSettingsInstance.deadPlayers >= GameSettings.GameSettingsInstance.numberOfPlayers - 1)
         {
+            Destroy(gameObject);
             GameSettings.GameSettingsInstance.EnqueueLastPlayer();
 
             //Load GameOver Scene
