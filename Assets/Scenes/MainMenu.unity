@@ -10555,8 +10555,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allVoices:
   - {fileID: 11400000, guid: a1f998ca9390ce840a6567d892b30d04, type: 2}
-  - {fileID: 11400000, guid: 4d6a1a12c0b158646be926affe06af54, type: 2}
-  - {fileID: 11400000, guid: b58225b33d8b73448894adff2b72c6c2, type: 2}
+  - {fileID: 11400000, guid: 20353ad103c6c45488dbbd275ab98dfb, type: 2}
+  - {fileID: 11400000, guid: bbeed18b7b861bd4fb912fc3ce50ebd7, type: 2}
 --- !u!1 &1514107175
 GameObject:
   m_ObjectHideFlags: 0
