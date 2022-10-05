@@ -53,7 +53,7 @@ public class CameraController : MonoBehaviour
         
         if (thirdPersonCam.enabled)
         {
-            if (Cursor.lockState == CursorLockMode.Locked)
+            if (Cursor.lockState == CursorLockMode.Locked && GameSettings.GameSettingsInstance.deadPlayers < GameSettings.GameSettingsInstance.numberOfPlayers - 1)
             {
                 MoveThirdPersonCamera();
             }
@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
         
         if (firstPersonCam.enabled)
         {
-            if (Cursor.lockState == CursorLockMode.Locked)
+            if (Cursor.lockState == CursorLockMode.Locked && GameSettings.GameSettingsInstance.deadPlayers < GameSettings.GameSettingsInstance.numberOfPlayers - 1)
             {
                 MoveFirstPersonCamera();
             }
