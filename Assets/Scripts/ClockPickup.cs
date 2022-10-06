@@ -21,8 +21,7 @@ public class ClockPickup : MonoBehaviour
             SoundManager.SoundManagerInstance.PlaySound(_activePlayerCon.allPlayerManagers[_activePlayerCon.activePlayerIndex].voicePack.timeUpSound);
 
             GetComponentInParent<PickupManager>().hasPickup = false;
-            
-            Destroy(this.gameObject);
+            GetComponentInParent<PickupManager>().DestroyChild();
         }
     }
 

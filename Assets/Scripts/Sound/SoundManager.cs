@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager SoundManagerInstance;
 
     [SerializeField] private AudioSource musicSource, effectSource;
+    [SerializeField] private AudioClip mainMusic, battleMusic;
     
     private void Awake()
     {
@@ -41,5 +42,17 @@ public class SoundManager : MonoBehaviour
     public void ChangeEffectVolume(float volume)
     {
         effectSource.volume = volume;
+    }
+
+    public void SetMenuMusic()
+    {
+        musicSource.clip = mainMusic;
+        musicSource.Play();
+    }
+
+    public void SetBattleMusic()
+    {
+        musicSource.clip = battleMusic;
+        musicSource.Play();
     }
 }

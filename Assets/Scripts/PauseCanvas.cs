@@ -79,6 +79,9 @@ public class PauseCanvas : MonoBehaviour
         MenuOut();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        
+        SoundManager.SoundManagerInstance.SetMenuMusic();
+        
         SceneManager.LoadScene(0);
     }
 }

@@ -12,8 +12,7 @@ public class HealthPickup : MonoBehaviour
             other.gameObject.GetComponent<PlayerManager>().Heal(health);
             
             GetComponentInParent<PickupManager>().hasPickup = false;
-            
-            Destroy(this.gameObject);
+            GetComponentInParent<PickupManager>().DestroyChild();
         }
     }
     

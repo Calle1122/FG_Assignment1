@@ -72,7 +72,7 @@ public class ActivePlayerController : MonoBehaviour
         
         NonActiveHandling();
 
-        if (GameSettings.GameSettingsInstance.isPaused == false && currentTurnTimer > 0)
+        if (GameSettings.GameSettingsInstance.isPaused == false)
         {
             currentTurnTimer -= Time.deltaTime;
             if (currentTurnTimer <= 0)
@@ -98,8 +98,6 @@ public class ActivePlayerController : MonoBehaviour
     
     public void NewTurn()
     {
-        Actions.OnTurnEnd();
-        
         BetweenTurn();
     }
 
@@ -116,6 +114,7 @@ public class ActivePlayerController : MonoBehaviour
             if (allPlayerManagers[GameSettings.GameSettingsInstance.playerToDisplay] != null)
             {
                 _hasChosen = true;
+                Actions.OnTurnEnd();
             }
         }
         

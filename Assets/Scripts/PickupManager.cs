@@ -1,4 +1,6 @@
 
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,6 +15,11 @@ public class PickupManager : MonoBehaviour
         Actions.OnTurnEnd += SpawnPickup;
     }
 
+    public void DestroyChild()
+    {
+        Destroy(transform.GetChild(0).gameObject);
+    }
+    
     private void SpawnPickup()
     {
         if (!hasPickup)
@@ -32,4 +39,8 @@ public class PickupManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        Actions.OnTurnEnd -= SpawnPickup;
+    }
 }

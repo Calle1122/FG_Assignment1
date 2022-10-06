@@ -109,6 +109,8 @@ public class PlayerManager : MonoBehaviour
             SoundManager.SoundManagerInstance.PlaySound(voicePack.deathSound);
             GameSettings.GameSettingsInstance.EnqueueLastPlayer();
 
+            SoundManager.SoundManagerInstance.SetMenuMusic();
+            
             //Load GameOver Scene
             SceneManager.LoadScene(2);
         }

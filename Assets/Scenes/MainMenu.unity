@@ -8485,6 +8485,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1429812070}
   effectSource: {fileID: 896338171}
+  mainMusic: {fileID: 8300000, guid: da049621a3d0a9342b96beda3f95ca5d, type: 3}
+  battleMusic: {fileID: 8300000, guid: c8a9feb1b0baf6944b1c40ecfb638340, type: 3}
 --- !u!4 &1124925974
 Transform:
   m_ObjectHideFlags: 0

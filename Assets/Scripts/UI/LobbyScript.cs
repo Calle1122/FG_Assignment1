@@ -84,6 +84,8 @@ public class LobbyScript : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
+        SoundManager.SoundManagerInstance.SetBattleMusic();
+        
         SceneManager.LoadScene(1);
 
         yield return null;
