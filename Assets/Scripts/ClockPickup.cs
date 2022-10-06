@@ -19,6 +19,8 @@ public class ClockPickup : MonoBehaviour
             _activePlayerCon.currentTurnTimer += time;
             
             SoundManager.SoundManagerInstance.PlaySound(_activePlayerCon.allPlayerManagers[_activePlayerCon.activePlayerIndex].voicePack.timeUpSound);
+
+            GetComponentInParent<PickupManager>().hasPickup = false;
             
             Destroy(this.gameObject);
         }

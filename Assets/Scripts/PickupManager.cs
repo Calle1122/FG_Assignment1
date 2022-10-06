@@ -1,23 +1,34 @@
 
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 public class PickupManager : MonoBehaviour
 {
-    [SerializeField] private Transform[] pickupPositions;
     [SerializeField] private GameObject[] pickUps;
 
-    public void SpawnPickup()
+    public bool hasPickup = false;
+
+    private void Awake()
     {
-        int spawnDecider = Random.Range(0, 3);
+        Actions.OnTurnEnd += SpawnPickup;
+    }
 
-        if (spawnDecider == 0)
+    private void SpawnPickup()
+    {
+        if (!hasPickup)
         {
-            int posPicker = Random.Range(0, pickupPositions.Length);
-            Vector3 spawnPos = pickupPositions[posPicker].position;
+            int spawnDecider = Random.Range(0, 20);
 
-            int pickPicker = Random.Range(0, pickUps.Length);
-            GameObject pickup = pickUps[pickPicker];
+            if (spawnDecider == 0)
+            {
+                int pickPicker = Random.Range(0, pickUps.Length);
+                GameObject pickup = pickUps[pickPicker];
 
-            Instantiate(pickup, spawnPos, Quaternion.identity);
+                GameObject newPickup = Instantiate(pickup, transform.position, Quaternion.identity);
+                newPickup.transform.parent = this.transform;
+                
+                hasPickup = true;
+            }
         }
     }
 

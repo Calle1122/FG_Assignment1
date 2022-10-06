@@ -8,7 +8,6 @@ public class ActivePlayerController : MonoBehaviour
     [SerializeField] private GameObject battleManObj;
     [SerializeField] private GameObject cameraContObj;
     [SerializeField] private GameObject battleUIObj;
-    [SerializeField] private GameObject pickupManagerObj;
 
     [SerializeField] private float secondsBeforeKinematic;
     private float _kinTimer;
@@ -21,8 +20,7 @@ public class ActivePlayerController : MonoBehaviour
 
     private CharacterController[] _allCharacterControllers;
     private WeaponManager[] _allWeaponManagers;
-
-    private PickupManager _pickMan;
+    
     private BattleManager _battleMan;
     private CameraController _cameraCont;
     private BattleUIController _uiCon;
@@ -39,7 +37,6 @@ public class ActivePlayerController : MonoBehaviour
         _allCharacterControllers = new CharacterController[GameSettings.GameSettingsInstance.numberOfPlayers];
         _allWeaponManagers = new WeaponManager[GameSettings.GameSettingsInstance.numberOfPlayers];
         _uiCon = battleUIObj.GetComponent<BattleUIController>();
-        _pickMan = pickupManagerObj.GetComponent<PickupManager>();
     }
 
     void Start()
@@ -75,7 +72,7 @@ public class ActivePlayerController : MonoBehaviour
         
         NonActiveHandling();
 
-        if (GameSettings.GameSettingsInstance.isPaused == false)
+        if (GameSettings.GameSettingsInstance.isPaused == false && currentTurnTimer > 0)
         {
             currentTurnTimer -= Time.deltaTime;
             if (currentTurnTimer <= 0)
@@ -143,8 +140,6 @@ public class ActivePlayerController : MonoBehaviour
 
     public void StartTurn()
     {
-        _pickMan.SpawnPickup();
-        
         _uiCon.betweenTurnHolder.SetActive(false);
         _uiCon.timerHolder.SetActive(true);
         _uiCon.activeFacesHolder.SetActive(true);

@@ -18,7 +18,7 @@ public class PlayerManager : MonoBehaviour
     private HealthbarManager _healthBar;
     
     public float maxHealth = 100;
-    private float _health = 100;
+    public float health = 100;
 
     public VoicePack voicePack;
 
@@ -42,17 +42,17 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        _health = maxHealth;
-        _healthBar.UpdateHealth((int)_health);
+        health = maxHealth;
+        _healthBar.UpdateHealth((int)health);
     }
 
     public void TakeDamage(float dmg)
     {
-        _health -= dmg;
+        health -= dmg;
         
-        _healthBar.UpdateHealth((int)_health);
+        _healthBar.UpdateHealth((int)health);
         
-        if (_health <= 0)
+        if (health <= 0)
         {
             Die();
         }
@@ -65,16 +65,16 @@ public class PlayerManager : MonoBehaviour
 
     public void Heal(float hp)
     {
-        _health += hp;
+        health += hp;
 
-        if (_health > maxHealth)
+        if (health > maxHealth)
         {
-            _health = maxHealth;
+            health = maxHealth;
         }
         
         SoundManager.SoundManagerInstance.PlaySound(voicePack.healthUpSound);
         
-        _healthBar.UpdateHealth((int)_health);
+        _healthBar.UpdateHealth((int)health);
     }
     
     private void Die()
@@ -83,28 +83,42 @@ public class PlayerManager : MonoBehaviour
         this.gameObject.SetActive(false);
         Destroy(deadRobotThing, 2f);
 
-        if (this.gameObject == GameObject.Find("ActivePlayerController").GetComponent<ActivePlayerController>()
-                .activePlayer)
+        if (this.gameObject == GameObject.Find("ActivePlayerController").GetComponent<ActivePlayerController>().activePlayer)
         {
+            GameSettings.GameSettingsInstance.DeadFaceQueue.Enqueue(face.sprite);
+            GameSettings.GameSettingsInstance.DeadNameQueue.Enqueue(nameTxt.text);
+            
+            GameSettings.GameSettingsInstance.deadPlayers++;
+            
             GameObject.Find("ActivePlayerController").GetComponent<ActivePlayerController>().NewTurn();
         }
 
-        GameSettings.GameSettingsInstance.DeadFaceQueue.Enqueue(face.sprite);
-        GameSettings.GameSettingsInstance.DeadNameQueue.Enqueue(nameTxt.text);
+
+        else
+        {
+            GameSettings.GameSettingsInstance.DeadFaceQueue.Enqueue(face.sprite);
+            GameSettings.GameSettingsInstance.DeadNameQueue.Enqueue(nameTxt.text);
         
-        GameSettings.GameSettingsInstance.deadPlayers++;
+            GameSettings.GameSettingsInstance.deadPlayers++;
+        }
+        
 
         if (GameSettings.GameSettingsInstance.deadPlayers >= GameSettings.GameSettingsInstance.numberOfPlayers - 1)
         {
             Destroy(gameObject);
+            SoundManager.SoundManagerInstance.PlaySound(voicePack.deathSound);
             GameSettings.GameSettingsInstance.EnqueueLastPlayer();
 
             //Load GameOver Scene
             SceneManager.LoadScene(2);
         }
+
+        else
+        {
+            SoundManager.SoundManagerInstance.PlaySound(voicePack.deathSound);
         
-        SoundManager.SoundManagerInstance.PlaySound(voicePack.deathSound);
+            Destroy(gameObject);
+        }
         
-        Destroy(gameObject);
     }
 }

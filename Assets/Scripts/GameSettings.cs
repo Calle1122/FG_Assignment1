@@ -51,10 +51,16 @@ public class GameSettings : MonoBehaviour
     {
         ActivePlayerController gameCon = GameObject.Find("ActivePlayerController").GetComponent<ActivePlayerController>();
 
-        gameCon.NextPlayerActive();
+        foreach (PlayerManager playerMan in gameCon.allPlayerManagers)
+        {
+            if (playerMan != null && playerMan.health > 0)
+            {
+                DeadFaceQueue.Enqueue(playerMan.face.sprite);
+                DeadNameQueue.Enqueue(playerMan.nameTxt.text);
+            }
+        }
+
         
-        DeadFaceQueue.Enqueue(gameCon.allPlayerManagers[gameCon.activePlayerIndex].face.sprite);
-        DeadNameQueue.Enqueue(gameCon.allPlayerManagers[gameCon.activePlayerIndex].nameTxt.text);
     }
 
     public void QuitGame()
